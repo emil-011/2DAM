@@ -4,18 +4,12 @@ import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import main.MainApp;
 import utils.Cliente;
-import utils.Producto;
-
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JScrollPane;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.BorderLayout;

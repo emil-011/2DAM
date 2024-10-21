@@ -4,9 +4,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-import main.MainApp;
 import utils.Cliente;
-import utils.Producto;
+
 
 public class MainWindow extends JFrame {
 

@@ -6,13 +6,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import utils.Producto;
-import gui.ListarProductos;
+
 import java.awt.Color;
 
 public class AltaProductos extends JFrame {
