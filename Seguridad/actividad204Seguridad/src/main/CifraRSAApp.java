@@ -1,10 +1,8 @@
 package main;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
-
-import javax.crypto.Cipher;
-import javax.crypto.NoSuchPaddingException;
+import java.io.FileInputStream;
+import java.security.KeyStore;
+import java.security.cert.Certificate;
 
 public class CifraRSAApp {
 
@@ -16,13 +14,27 @@ public class CifraRSAApp {
 
 		String textoACifrar = args[0];
 		String alias = args[1];
+		
+		String keyStorePath = "almacenClaves.jks";
+		char[] keyStorePassword = "12345678".toCharArray();
+		
+		FileInputStream keyStoreFile = null;
 
 		try {
-			Cipher.getInstance(textoACifrar, alias);
-		} catch (NoSuchAlgorithmException | NoSuchProviderException | NoSuchPaddingException e) {
-			e.printStackTrace();
+			KeyStore keyStore = KeyStore.getInstance("JKS");
+			keyStoreFile = new FileInputStream(keyStorePath);
+			keyStore.load(keyStoreFile, keyStorePassword);
+			
+			Certificate certificate
+			
+		} catch (Exception e) {
+			
 		}
+		
+		
 
+	
+		
 	}
 
 }
