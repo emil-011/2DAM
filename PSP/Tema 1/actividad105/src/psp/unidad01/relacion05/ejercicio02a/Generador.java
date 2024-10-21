@@ -2,7 +2,6 @@ package psp.unidad01.relacion05.ejercicio02a;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.IOException;
 
 public class Generador {
 
