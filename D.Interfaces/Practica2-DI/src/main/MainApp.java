@@ -8,6 +8,5 @@ public class MainApp {
 			MainWindow swing = new MainWindow();
 			swing.setVisible(true);
 		}
-	
 
 }
