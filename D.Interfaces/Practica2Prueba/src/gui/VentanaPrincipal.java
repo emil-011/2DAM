@@ -1,16 +1,7 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Image;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JFrame;
-import javax.swing.SwingConstants;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -29,7 +20,11 @@ public class VentanaPrincipal extends JFrame {
 	private JPanel panelTabla;
 
 	public VentanaPrincipal() {
+
+		ImageIcon icon = new ImageIcon(getClass().getResource("/resources/youtube.png"));
+		setIconImage(icon.getImage());
 		setTitle("Youtube");
+
 		getContentPane().setLayout(new BorderLayout(0, 0));
 
 		JPanel panelPrincipal = new JPanel();
@@ -67,13 +62,13 @@ public class VentanaPrincipal extends JFrame {
 		panelCentral.add(panelBotoneras, BorderLayout.NORTH);
 		panelBotoneras.setLayout(new GridLayout(1, 4));
 
-		// Etiquetas con eventos de mouse
 		lblClientes = new JLabel("Clientes");
 		lblClientes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lblClientes.setBackground(new Color(255, 50, 50));
 				lblClientes.setForeground(Color.white);
+				lblClientes.setCursor(new Cursor(Cursor.HAND_CURSOR));
 			}
 
 			@Override
@@ -84,34 +79,34 @@ public class VentanaPrincipal extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// Mostrar el cuadro de diálogo con las opciones
-				String[] options = { "Dar de Alta", "Dar de Baja", "Cancelar" };
-				int response = JOptionPane.showOptionDialog(null, // Componente padre
-						"¿Qué quieres hacer?", // Mensaje
-						"Gestión de Clientes", // Título
-						JOptionPane.DEFAULT_OPTION, 
-						JOptionPane.QUESTION_MESSAGE,
-						null,
-						options, // Opciones
-						options[0] // Opción predeterminada
-				);
+				String[] options = { "Dar de Alta", "Dar de Baja", "Mostrar Lista", "Cancelar" };
+				int response = JOptionPane.showOptionDialog(null, "¿Qué quieres hacer?", "Gestión de Clientes",
+						JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
-				// Comprobar qué opción seleccionó el usuario
 				if (response == 0) {
-					// Dar de Alta
-					FormularioAltaCliente formulario = new FormularioAltaCliente();
-		            panelTabla.removeAll(); // Eliminar los componentes actuales (la tabla)
-		            panelTabla.add(formulario, BorderLayout.CENTER); // Añadir el formulario
-		            panelTabla.revalidate(); // Refrescar el panel
-		            panelTabla.repaint(); // Volver a pintar el panel					
+					TablaClientes tablaClientes = new TablaClientes();
+					AltaCliente formulario = new AltaCliente(tablaClientes);
+					panelTabla.removeAll();
+					panelTabla.add(formulario, BorderLayout.CENTER);
+					panelTabla.revalidate();
+					panelTabla.repaint();
+				} else if (response == 1) {
+					BajaCliente bajaClientes = new BajaCliente();
+					panelTabla.removeAll();
+					panelTabla.add(bajaClientes, BorderLayout.CENTER);
+					panelTabla.revalidate();
+					panelTabla.repaint();
+				} else if (response == 2) {
+					mostrarListaClientes();
 				}
 			}
 		});
 		lblClientes.setHorizontalAlignment(SwingConstants.CENTER);
 		lblClientes.setForeground(Color.black);
 		lblClientes.setBackground(new Color(230, 0, 0));
-		lblClientes.setFont(new Font("Lexend", Font.BOLD, 18));
+		lblClientes.setFont(new Font("Lexend", Font.BOLD, 24));
 		lblClientes.setOpaque(true);
+		panelBotoneras.add(lblClientes);
 
 		lblProductos = new JLabel("Productos");
 		lblProductos.addMouseListener(new MouseAdapter() {
@@ -119,6 +114,7 @@ public class VentanaPrincipal extends JFrame {
 			public void mouseEntered(MouseEvent e) {
 				lblProductos.setBackground(new Color(255, 50, 50));
 				lblProductos.setForeground(Color.white);
+				lblProductos.setCursor(new Cursor(Cursor.HAND_CURSOR));
 			}
 
 			@Override
@@ -126,12 +122,37 @@ public class VentanaPrincipal extends JFrame {
 				lblProductos.setBackground(new Color(230, 0, 0));
 				lblProductos.setForeground(Color.black);
 			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String[] options = { "Dar de Alta", "Dar de Baja", "Mostrar Lista", "Cancelar" };
+				int response = JOptionPane.showOptionDialog(null, "¿Qué quieres hacer?", "Gestión de Productos",
+						JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
+				if (response == 0) {
+					TablaProducto tablaProductos = new TablaProducto();
+					AltaProducto formulario = new AltaProducto(tablaProductos);
+					panelTabla.removeAll();
+					panelTabla.add(formulario, BorderLayout.CENTER);
+					panelTabla.revalidate();
+					panelTabla.repaint();
+				} else if (response == 1) {
+					BajaProducto bajaProductos = new BajaProducto();
+					panelTabla.removeAll();
+					panelTabla.add(bajaProductos, BorderLayout.CENTER);
+					panelTabla.revalidate();
+					panelTabla.repaint();
+				} else if (response == 2) {
+					mostrarListaProductos();
+				}
+			}
 		});
 		lblProductos.setHorizontalAlignment(SwingConstants.CENTER);
 		lblProductos.setForeground(Color.black);
 		lblProductos.setBackground(new Color(230, 0, 0));
-		lblProductos.setFont(new Font("Lexend", Font.BOLD, 18));
+		lblProductos.setFont(new Font("Lexend", Font.BOLD, 24));
 		lblProductos.setOpaque(true);
+		panelBotoneras.add(lblProductos);
 
 		lblFacturas = new JLabel("Facturas");
 		lblFacturas.addMouseListener(new MouseAdapter() {
@@ -139,6 +160,7 @@ public class VentanaPrincipal extends JFrame {
 			public void mouseEntered(MouseEvent e) {
 				lblFacturas.setBackground(new Color(255, 50, 50));
 				lblFacturas.setForeground(Color.white);
+				lblFacturas.setCursor(new Cursor(Cursor.HAND_CURSOR));
 			}
 
 			@Override
@@ -150,8 +172,9 @@ public class VentanaPrincipal extends JFrame {
 		lblFacturas.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFacturas.setForeground(Color.black);
 		lblFacturas.setBackground(new Color(230, 0, 0));
-		lblFacturas.setFont(new Font("Lexend", Font.BOLD, 18));
+		lblFacturas.setFont(new Font("Lexend", Font.BOLD, 24));
 		lblFacturas.setOpaque(true);
+		panelBotoneras.add(lblFacturas);
 
 		lblUsuario = new JLabel("Usuario");
 		lblUsuario.addMouseListener(new MouseAdapter() {
@@ -159,6 +182,7 @@ public class VentanaPrincipal extends JFrame {
 			public void mouseEntered(MouseEvent e) {
 				lblUsuario.setBackground(new Color(50, 50, 255));
 				lblUsuario.setForeground(Color.white);
+				lblUsuario.setCursor(new Cursor(Cursor.HAND_CURSOR));
 			}
 
 			@Override
@@ -170,22 +194,32 @@ public class VentanaPrincipal extends JFrame {
 		lblUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		lblUsuario.setForeground(Color.black);
 		lblUsuario.setBackground(new Color(0, 0, 230));
-		lblUsuario.setFont(new Font("Lexend", Font.BOLD, 18));
+		lblUsuario.setFont(new Font("Lexend", Font.BOLD, 24));
 		lblUsuario.setOpaque(true);
-
-		// Añadir las etiquetas al panelBotoneras
-		panelBotoneras.add(lblClientes);
-		panelBotoneras.add(lblProductos);
-		panelBotoneras.add(lblFacturas);
 		panelBotoneras.add(lblUsuario);
 
-		// Panel para la tabla
 		panelTabla = new JPanel();
-		panelTabla.setLayout(new BorderLayout()); // Usar un BorderLayout para el panelTabla
+		panelTabla.setLayout(new BorderLayout());
 		panelCentral.add(panelTabla, BorderLayout.CENTER);
+	}
 
-		// Crear la tabla de clientes
+	// Metodo para mostrar los clientes
+	private void mostrarListaClientes() {
+		panelTabla.removeAll();
 		TablaClientes tablaClientes = new TablaClientes();
-		panelTabla.add(tablaClientes, BorderLayout.CENTER); // Añadimos directamente la tabla sin un JScrollPane extra
+		tablaClientes.cargarClientesCSV();
+		panelTabla.add(tablaClientes, BorderLayout.CENTER);
+		panelTabla.revalidate();
+		panelTabla.repaint();
+	}
+
+	// Metodo para mostrar los productos
+	private void mostrarListaProductos() {
+		panelTabla.removeAll();
+		TablaProducto tablaProductos = new TablaProducto();
+		tablaProductos.cargarProductosCSV();
+		panelTabla.add(tablaProductos, BorderLayout.CENTER);
+		panelTabla.revalidate();
+		panelTabla.repaint();
 	}
 }

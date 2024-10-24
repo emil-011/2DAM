@@ -1,13 +1,21 @@
 package utils;
 
+/**
+ * Clase producto
+ */
 public class Producto {
 
 	private String nombre;
 	private double precioUnitario;
 	private boolean perecedero;
 
+	/**
+	 * Constructor producto
+	 * @param nombre Nombre del producto
+	 * @param precioUnitario Precio por unidad
+	 * @param perecedero Si caduca el producto o no
+	 */
 	public Producto(String nombre, double precioUnitario, boolean perecedero) {
-		super();
 		this.nombre = nombre;
 		this.precioUnitario = precioUnitario;
 		this.perecedero = perecedero;
@@ -23,12 +31,6 @@ public class Producto {
 
 	public String isPerecedero() {
 		return perecedero ? "Si" : "No";
-	}
-
-	@Override
-	public String toString() {
-		return "📦 Producto: " + nombre.toUpperCase() + " " + " | Precio Unitario: " + precioUnitario
-				+ " € | Perecedero: " + isPerecedero();
 	}
 
 }
