@@ -73,11 +73,10 @@ public class TablaClientes extends JPanel {
 
         // Crear la tabla con el modelo
         table = new JTable(model);
-        table.setFont(new Font("Lexend", Font.PLAIN, 16)); // Cambiar el tamaño según sea necesario
-        table.setFillsViewportHeight(true); // Hacer que la tabla llene el viewport
-
-        // Permitir el ordenamiento en las columnas
-        table.setAutoCreateRowSorter(true); // Activar el ordenamiento de filas
+        table.setFont(new Font("Lexend", Font.PLAIN, 16));
+        table.setFillsViewportHeight(true);
+       
+        table.setAutoCreateRowSorter(true);
 
         // Crear y añadir el JScrollPane que contiene la tabla
         JScrollPane scrollPane = new JScrollPane(table);
