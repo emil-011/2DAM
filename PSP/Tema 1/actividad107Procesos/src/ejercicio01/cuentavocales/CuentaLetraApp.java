@@ -1,4 +1,4 @@
-package cuentavocales.ejercicio01;
+package ejercicio01.cuentavocales;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

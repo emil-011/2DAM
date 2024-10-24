@@ -1,4 +1,4 @@
-package sumador.ejercicio02;
+package ejercicio02.sumador;
 
 public class Sumador {
 
