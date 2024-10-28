@@ -15,7 +15,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
 import java.awt.Toolkit;
 
-public class Login extends JFrame {
+public class VentanaLogin extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -25,8 +25,8 @@ public class Login extends JFrame {
 	private JLabel lblBanner;
 	private JLabel lblBienvenida;
 
-	public Login() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/resources/logoApp.png")));
+	public VentanaLogin() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaLogin.class.getResource("/resources/logoApp.png")));
 		setTitle("GYM Picasso");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(500, 300, 900, 550);
@@ -47,7 +47,7 @@ public class Login extends JFrame {
 		mainPanel.add(topPanel, BorderLayout.NORTH);
 
 		lblBanner = new JLabel("GYM Picasso");
-		lblBanner.setIcon(new ImageIcon(Login.class.getResource("/resources/logoApp.png")));
+		lblBanner.setIcon(new ImageIcon(VentanaLogin.class.getResource("/resources/logoApp.png")));
 		lblBanner.setFont(new Font("Verdana", Font.BOLD, 32));
 		lblBanner.setForeground(new Color(22, 101, 143));
 		topPanel.add(lblBanner);
@@ -56,7 +56,7 @@ public class Login extends JFrame {
 		mainPanel.add(centerPanel, BorderLayout.CENTER);
 		centerPanel.setLayout(new BorderLayout(0, 0));
 
-		ImageIcon originalIcon = new ImageIcon(Login.class.getResource("/resources/imgLogin.png"));
+		ImageIcon originalIcon = new ImageIcon(VentanaLogin.class.getResource("/resources/imgLogin.png"));
 		Image originalImage = originalIcon.getImage();
 		Image scaledImage = originalImage.getScaledInstance(400, 325, Image.SCALE_SMOOTH);
 
@@ -74,7 +74,7 @@ public class Login extends JFrame {
 		JPanel panelLogIn = new JPanel();
 		panelRight.add(panelLogIn);
 		panelLogIn.setLayout(new GridLayout(1, 0, 0, 0));
-		loginUsuario = new LoginUsuario();
+		loginUsuario = new LoginUsuario(this);
 		JScrollPane scrollPane = new JScrollPane();
 
 		scrollPane.setViewportView(loginUsuario);
@@ -91,14 +91,11 @@ public class Login extends JFrame {
 		lblBienvenida.setForeground(new Color(255, 255, 255));
 		lblBienvenida.setFont(new Font("Verdana", Font.PLAIN, 20));
 		panelBienvenida.add(lblBienvenida);
-		
-		
-		
-	
+
 	}
-	
-	
-	
-	
+
+	public void cerrarVentana() {
+		this.dispose();
+	}
 
 }

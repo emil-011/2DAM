@@ -45,7 +45,7 @@ public class VentanaRegistro extends JFrame {
 	public VentanaRegistro() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(650, 200, 600, 650);
+		setBounds(650, 250, 600, 650);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

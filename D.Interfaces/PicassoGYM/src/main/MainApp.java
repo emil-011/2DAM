@@ -1,11 +1,11 @@
 package main;
 
-import gui.Login;
+import gui.VentanaLogin;
 
 public class MainApp {
 
 	public static void main(String[] args) {
-		Login lg = new Login();
+		VentanaLogin lg = new VentanaLogin();
 		lg.setVisible(true);
 	}
 

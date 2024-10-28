@@ -25,9 +25,11 @@ public class LoginUsuario extends JPanel {
 	private JLabel lblBtnLogIn;
 	private JLabel lblBtnRegister;
 	private JPasswordField passwordField;
+	private VentanaLogin login;
 	private static final String USUARIOS_REGISTRADOS = "usuarios_registrados.csv";
 
-	public LoginUsuario() {
+	public LoginUsuario(VentanaLogin login) {
+		this.login = login;
 		setBackground(new Color(183, 243, 249));
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
@@ -66,6 +68,7 @@ public class LoginUsuario extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				iniciarSesion();
+
 			}
 		});
 		lblBtnLogIn.setFont(new Font("Verdana", Font.BOLD, 16));
@@ -110,7 +113,6 @@ public class LoginUsuario extends JPanel {
 	protected void iniciarSesion() {
 		String usuario = txtUsuario.getText();
 		char[] password = passwordField.getPassword();
-		// Lo pasamos a string
 		String passwordString = new String(password);
 		String perfilUsuario = "";
 
@@ -127,26 +129,29 @@ public class LoginUsuario extends JPanel {
 				}
 			}
 
-			if (!inicioExitoso) {
+			if (inicioExitoso) {
+				if (perfilUsuario.equals("Cliente")) {
+					// Acciones para cliente, si es necesario
+				} else {
+					VentanaAdministracion ventanaAdmin = new VentanaAdministracion();
+					ventanaAdmin.setVisible(true);
+				}
+				// Cierra ventana de login después de iniciar sesion
+				login.cerrarVentana();
+			} else {
 				JOptionPane.showMessageDialog(this, "Error: Usuario o contraseña incorrectos.",
 						"Error de Inicio de Sesión", JOptionPane.ERROR_MESSAGE);
 			}
-			
-			if (perfilUsuario.equals("Cliente")) {
-				
-			} else if (perfilUsuario.equals("Administracion")) {
-				
-			}
-			
 
 		} catch (FileNotFoundException e) {
 			JOptionPane.showMessageDialog(this, "Error: No se pudo encontrar el archivo de usuarios.",
 					"Archivo No Encontrado", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(this, "Error: Problema al leer el archivo de usuarios.",
-					"Error de Lectura", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Error: Problema al leer el archivo de usuarios.", "Error de Lectura",
+					JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
 	}
+
 }
