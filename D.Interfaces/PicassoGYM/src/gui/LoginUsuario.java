@@ -17,6 +17,8 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import javax.swing.JPasswordField;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class LoginUsuario extends JPanel {
 
@@ -40,6 +42,14 @@ public class LoginUsuario extends JPanel {
 		lblUsuario.setFont(new Font("Verdana", Font.BOLD, 16));
 
 		txtUsuario = new JTextField();
+		txtUsuario.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					passwordField.requestFocusInWindow();
+				}
+			}
+		});
 		txtUsuario.setFont(new Font("Verdana", Font.PLAIN, 12));
 		txtUsuario.setBounds(192, 44, 210, 30);
 		txtUsuario.setColumns(10);
@@ -106,6 +116,15 @@ public class LoginUsuario extends JPanel {
 		add(lblBtnRegister);
 
 		passwordField = new JPasswordField();
+		passwordField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					iniciarSesion();
+				}
+			}
+		});
+		passwordField.setFont(new Font("Verdana", Font.PLAIN, 12));
 		passwordField.setBounds(192, 88, 210, 30);
 		add(passwordField);
 	}
@@ -131,7 +150,8 @@ public class LoginUsuario extends JPanel {
 
 			if (inicioExitoso) {
 				if (perfilUsuario.equals("Cliente")) {
-					// Acciones para cliente, si es necesario
+					VentanaCliente ventanaCliente = new VentanaCliente();
+					ventanaCliente.setVisible(true);
 				} else {
 					VentanaAdministracion ventanaAdmin = new VentanaAdministracion();
 					ventanaAdmin.setVisible(true);

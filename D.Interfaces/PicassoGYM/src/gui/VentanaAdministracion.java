@@ -14,13 +14,19 @@ public class VentanaAdministracion extends JFrame {
 	private JLabel lblReservas;
 	private JLabel lblVerClientes;
 	private JLabel lblCerrarSesion;
+	
+	public static void main(String[] args) {
+		VentanaAdministracion ventana = new VentanaAdministracion();
+		ventana.setVisible(true); // Muestra la ventana
+	}
 
 	public VentanaAdministracion() {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit()
 				.getImage(VentanaAdministracion.class.getResource("/resources/logoApp.png")));
 		setTitle("Tools");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(600, 250, 804, 622);
+		setBounds(600, 250, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -82,6 +88,11 @@ public class VentanaAdministracion extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				lblAnyadirClase.setBackground(new Color(255, 255, 255));
 			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				VentanaNuevaClase nuevaClase = new VentanaNuevaClase();
+				nuevaClase.setVisible(true);
+			}
 		});
 		lblAnyadirClase.setIcon(new ImageIcon(VentanaAdministracion.class.getResource("/resources/addClase.png")));
 		lblAnyadirClase.setHorizontalAlignment(SwingConstants.CENTER);
@@ -124,6 +135,11 @@ public class VentanaAdministracion extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				lblVerClientes.setBackground(new Color(255, 255, 255));
 			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				VentanaListarClientes tablaClientes = new VentanaListarClientes();
+				tablaClientes.setVisible(true);
+			}
 		});
 		lblVerClientes.setVerticalTextPosition(SwingConstants.BOTTOM);
 		lblVerClientes.setIcon(new ImageIcon(VentanaAdministracion.class.getResource("/resources/listarUsuarios.png")));
@@ -145,6 +161,12 @@ public class VentanaAdministracion extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				lblCerrarSesion.setBackground(new Color(255, 255, 255));
 			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				dispose();
+				VentanaLogin login = new VentanaLogin();
+				login.setVisible(true);
+			}
 		});
 		lblCerrarSesion.setVerticalTextPosition(SwingConstants.BOTTOM);
 		lblCerrarSesion.setIcon(new ImageIcon(VentanaAdministracion.class.getResource("/resources/cierreSesion.png")));
@@ -152,4 +174,5 @@ public class VentanaAdministracion extends JFrame {
 		lblCerrarSesion.setHorizontalAlignment(SwingConstants.CENTER);
 		centerPanel.add(lblCerrarSesion);
 	}
+
 }
