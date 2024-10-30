@@ -3,8 +3,18 @@ package gui;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import utils.Usuario;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class VentanaCliente extends JFrame {
 
@@ -12,11 +22,19 @@ public class VentanaCliente extends JFrame {
 	private JPanel contentPane;
 	private JLabel lblReservarClase;
 	private JLabel lblCerrarSesion;
+	private JLabel lblUsuario;
+	private static final String CLIENTES_REGISTRADOS = "usuarios_registrados.csv";
 
-	public VentanaCliente() {
+	public static void main(String[] args) {
+		Usuario usuario = new Usuario("Pepin", "Fernandez", new Date(), "cliente", "lolito@gmail.com",
+				"1234", true);
+		VentanaCliente cliente = new VentanaCliente(usuario);
+		cliente.setVisible(true);
+	}
+
+	public VentanaCliente(Usuario usuario) {
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage(VentanaCliente.class.getResource("/resources/logoApp.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaCliente.class.getResource("/resources/logoApp.png")));
 		setTitle("Tools");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(600, 250, 804, 622);
@@ -42,10 +60,13 @@ public class VentanaCliente extends JFrame {
 		footer.setBackground(new Color(181, 243, 249));
 		contentPane.add(footer, BorderLayout.SOUTH);
 
-		JLabel lblNewLabel = new JLabel("Emilio Fernández Gallardo");
-		lblNewLabel.setForeground(new Color(22, 100, 143));
-		lblNewLabel.setFont(new Font("Verdana", Font.BOLD, 20));
-		footer.add(lblNewLabel);
+		lblUsuario = new JLabel("");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		String formattedDate = sdf.format(new Date());
+		lblUsuario.setText(usuario.getNombre() + " " + usuario.getApellidos() + " " + formattedDate);
+		lblUsuario.setForeground(new Color(22, 100, 143));
+		lblUsuario.setFont(new Font("Verdana", Font.BOLD, 20));
+		footer.add(lblUsuario);
 
 		JPanel leftGap = new JPanel();
 		leftGap.setBackground(new Color(255, 255, 255));
@@ -66,19 +87,19 @@ public class VentanaCliente extends JFrame {
 		centerPanel.setBackground(Color.WHITE);
 		contentPane.add(centerPanel, BorderLayout.CENTER);
 		centerPanel.setLayout(new BorderLayout(0, 0));
-		
+
 		JLabel lblNewLabel_1 = new JLabel(" ");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 60));
 		centerPanel.add(lblNewLabel_1, BorderLayout.NORTH);
-		
+
 		JLabel lblNewLabel_2 = new JLabel(" ");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 60));
 		centerPanel.add(lblNewLabel_2, BorderLayout.SOUTH);
-		
+
 		JPanel panel = new JPanel();
 		centerPanel.add(panel, BorderLayout.CENTER);
 		panel.setLayout(new GridLayout(1, 0, 0, 0));
-		
+
 		lblReservarClase = new JLabel("Reservar Clase");
 		lblReservarClase.addMouseListener(new MouseAdapter() {
 			@Override
@@ -90,6 +111,11 @@ public class VentanaCliente extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				lblReservarClase.setBackground(new Color(255, 255, 255));
 			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				VentanaReservarClase reservar = new VentanaReservarClase(usuario);
+				reservar.setVisible(true);
+			}
 		});
 		lblReservarClase.setVerticalTextPosition(SwingConstants.BOTTOM);
 		lblReservarClase.setOpaque(true);
@@ -99,7 +125,7 @@ public class VentanaCliente extends JFrame {
 		lblReservarClase.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblReservarClase.setBackground(Color.WHITE);
 		panel.add(lblReservarClase);
-		
+
 		lblCerrarSesion = new JLabel("Cerrar Sesión");
 		lblCerrarSesion.addMouseListener(new MouseAdapter() {
 			@Override
@@ -111,6 +137,11 @@ public class VentanaCliente extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				lblCerrarSesion.setBackground(new Color(255, 255, 255));
 			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cerrarSesion();
+			}
 		});
 		lblCerrarSesion.setVerticalTextPosition(SwingConstants.BOTTOM);
 		lblCerrarSesion.setOpaque(true);
@@ -120,5 +151,43 @@ public class VentanaCliente extends JFrame {
 		lblCerrarSesion.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblCerrarSesion.setBackground(Color.WHITE);
 		panel.add(lblCerrarSesion);
+	}
+
+	protected void cerrarSesion() {
+		StringBuilder updatedContent = new StringBuilder();
+
+		try (BufferedReader reader = new BufferedReader(new FileReader(CLIENTES_REGISTRADOS))) {
+			String line;
+
+			while ((line = reader.readLine()) != null) {
+				String[] datos = line.trim().split(";");
+
+				if (datos[6].equals("true")) {
+					datos[6] = "false";
+				}
+
+				// Append the (potentially modified) line to the updated content
+				updatedContent.append(String.join(";", datos)).append("\n");
+			}
+
+			// Write the updated content back to the file
+			try (FileWriter writer = new FileWriter(CLIENTES_REGISTRADOS)) {
+				writer.write(updatedContent.toString());
+			}
+
+			// Close the administration window and open the login window
+			dispose();
+			VentanaLogin login = new VentanaLogin();
+			login.setVisible(true);
+
+		} catch (FileNotFoundException e) {
+			JOptionPane.showMessageDialog(this, "Error: No se pudo encontrar el archivo de usuarios.",
+					"Archivo No Encontrado", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(this, "Error: Problema al leer el archivo de usuarios.", "Error de Lectura",
+					JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
 	}
 }

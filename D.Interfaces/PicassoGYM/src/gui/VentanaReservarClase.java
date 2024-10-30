@@ -3,7 +3,12 @@ package gui;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import utils.Usuario;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.SwingConstants;
@@ -11,10 +16,14 @@ import javax.swing.JComboBox;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class VentanaReservarClase extends JFrame {
 
@@ -25,16 +34,20 @@ public class VentanaReservarClase extends JFrame {
 	private static final String CLASES = "clases.csv";
 	private JComboBox<String> comboBoxClase;
 	private JComboBox<String> comboBoxTurno;
-	
+	private Usuario usuario;
+
 	public static void main(String[] args) {
-		VentanaReservarClase reserva = new VentanaReservarClase();
+		Usuario usuario = new Usuario("Pepin", "Fernandez", new Date(), "cliente", "lolito@gmail.com",
+				"1234", true);
+		VentanaReservarClase reserva = new VentanaReservarClase(usuario);
 		reserva.setVisible(true);
 	}
 
-	public VentanaReservarClase() {
+	public VentanaReservarClase(Usuario usuario) {
+		this.usuario = usuario;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(650, 250, 452, 370);
+		setBounds(800, 400, 452, 370);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -66,7 +79,7 @@ public class VentanaReservarClase extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
+				reservarClase();
 			}
 		});
 		lblEnviar.setForeground(new Color(255, 255, 255));
@@ -95,16 +108,47 @@ public class VentanaReservarClase extends JFrame {
 		contentPane.add(comboBoxTurno);
 
 		cargarClases();
-		comboBoxTurno.setSelectedIndex(-1);
 		comboBoxClase.setSelectedIndex(-1);
+		comboBoxTurno.setSelectedIndex(-1);
+
+		comboBoxClase.addActionListener(e -> cargarTurnos((String) comboBoxClase.getSelectedItem()));
 	}
 
+	protected void reservarClase() {
+	        // Get selected class and turn
+	        String clase = (String) comboBoxClase.getSelectedItem();
+	        String turno = (String) comboBoxTurno.getSelectedItem();
+	        
+	        if (clase == null || turno == null) {
+	            JOptionPane.showMessageDialog(this, "Por favor, seleccione una clase y un turno.", "Error", JOptionPane.ERROR_MESSAGE);
+	            return;
+	        }
+
+	        // Build the reservation entry
+	        String reservationEntry = usuario.getNombre() + ";" + usuario.getApellidos() + ";" + clase + ";" + turno;
+
+	        // Write the reservation to the CSV file
+	        try (BufferedWriter writer = new BufferedWriter(new FileWriter("reservas.csv", true))) {
+	            writer.write(reservationEntry);
+	            writer.newLine();
+	            JOptionPane.showMessageDialog(this, "Clase reservada con éxito!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+	        } catch (IOException e) {
+	            JOptionPane.showMessageDialog(this, "Error al guardar la reserva.", "Error", JOptionPane.ERROR_MESSAGE);
+	            e.printStackTrace();
+	        }
+	    }
+	    
+
 	protected void cargarClases() {
+		Set<String> clasesSet = new HashSet<>(); // Set para evitar duplicados
 		try (BufferedReader reader = new BufferedReader(new FileReader(CLASES))) {
 			String linea = "";
-			while((linea = reader.readLine()) != null) {
+			while ((linea = reader.readLine()) != null) {
 				String[] datosClases = linea.trim().split(";");
-				comboBoxClase.addItem(datosClases[0]);
+				String clase = datosClases[0];
+				if (clasesSet.add(clase)) {
+					comboBoxClase.addItem(clase);
+				}
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -113,4 +157,22 @@ public class VentanaReservarClase extends JFrame {
 		}
 	}
 
+	protected void cargarTurnos(String claseSeleccionada) {
+		comboBoxTurno.removeAllItems();
+		try (BufferedReader reader = new BufferedReader(new FileReader(CLASES))) {
+			String linea = "";
+			while ((linea = reader.readLine()) != null) {
+				String[] datosClases = linea.trim().split(";");
+				String clase = datosClases[0];
+				String turno = datosClases[2];
+				if (clase.equals(claseSeleccionada)) {
+					comboBoxTurno.addItem(turno);
+				}
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

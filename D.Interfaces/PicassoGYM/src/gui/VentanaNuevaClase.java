@@ -34,7 +34,13 @@ public class VentanaNuevaClase extends JFrame {
 	private JRadioButton rdBtnTarde;
 	private JLabel lblTurno;
 
+	public static void main(String[] args) {
+		VentanaNuevaClase nuevaClase = new VentanaNuevaClase();
+		nuevaClase.setVisible(true);
+	}
+
 	public VentanaNuevaClase() {
+
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(650, 250, 600, 420);
@@ -131,27 +137,23 @@ public class VentanaNuevaClase extends JFrame {
 			return;
 		}
 
-		if (isRepetida()) {
-			JOptionPane.showMessageDialog(this, "Error: Ya hay una clase igual en ese horario.", "Clase repetida",
-					JOptionPane.ERROR_MESSAGE);
+		if (!isRepetida()) {
+			String turno = "";
+
+			if (rdBtnMorning.isSelected()) {
+				turno = "Mañana";
+			} else if (rdBtnTarde.isSelected()) {
+				turno = "Tarde";
+			}
+
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter(CLASES, true))) {
+				writer.write(txtNombre.getText() + ";" + txtProfesor.getText() + ";" + turno);
+				writer.newLine();
+				limpiarCampos();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-
-		String turno = "";
-
-		if (rdBtnMorning.isSelected()) {
-			turno = "Mañana";
-		} else if (rdBtnTarde.isSelected()) {
-			turno = "Tarde";
-		}
-
-		try (BufferedWriter writer = new BufferedWriter(new FileWriter(CLASES, true))) {
-			writer.write(txtNombre.getText() + ";" + txtProfesor.getText() + ";" + turno);
-			writer.newLine();
-			limpiarCampos();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 	}
 
 	protected boolean isRepetida() {

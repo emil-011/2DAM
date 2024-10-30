@@ -5,6 +5,11 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class VentanaAdministracion extends JFrame {
 
@@ -14,7 +19,8 @@ public class VentanaAdministracion extends JFrame {
 	private JLabel lblReservas;
 	private JLabel lblVerClientes;
 	private JLabel lblCerrarSesion;
-	
+	private static final String CLIENTES_REGISTRADOS = "usuarios_registrados.csv";
+
 	public static void main(String[] args) {
 		VentanaAdministracion ventana = new VentanaAdministracion();
 		ventana.setVisible(true); // Muestra la ventana
@@ -88,6 +94,7 @@ public class VentanaAdministracion extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				lblAnyadirClase.setBackground(new Color(255, 255, 255));
 			}
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				VentanaNuevaClase nuevaClase = new VentanaNuevaClase();
@@ -114,6 +121,12 @@ public class VentanaAdministracion extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				lblReservas.setBackground(new Color(255, 255, 255));
 			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				VentanaListarReservas listarReservas = new VentanaListarReservas();
+				listarReservas.setVisible(true);
+			}
 		});
 		lblReservas.setVerticalTextPosition(SwingConstants.BOTTOM);
 		lblReservas.setIcon(new ImageIcon(VentanaAdministracion.class.getResource("/resources/listarReservas.png")));
@@ -135,6 +148,7 @@ public class VentanaAdministracion extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				lblVerClientes.setBackground(new Color(255, 255, 255));
 			}
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				VentanaListarClientes tablaClientes = new VentanaListarClientes();
@@ -161,11 +175,10 @@ public class VentanaAdministracion extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				lblCerrarSesion.setBackground(new Color(255, 255, 255));
 			}
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				dispose();
-				VentanaLogin login = new VentanaLogin();
-				login.setVisible(true);
+				cerrarSesion();
 			}
 		});
 		lblCerrarSesion.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -173,6 +186,44 @@ public class VentanaAdministracion extends JFrame {
 		lblCerrarSesion.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblCerrarSesion.setHorizontalAlignment(SwingConstants.CENTER);
 		centerPanel.add(lblCerrarSesion);
+	}
+
+	protected void cerrarSesion() {
+	    StringBuilder updatedContent = new StringBuilder();
+
+	    try (BufferedReader reader = new BufferedReader(new FileReader(CLIENTES_REGISTRADOS))) {
+	        String line;
+	        
+	        while ((line = reader.readLine()) != null) {
+	            String[] datos = line.trim().split(";");
+	            
+	            if (datos[6].equals("true")) {
+	                datos[6] = "false";
+	            }
+	            
+	            // Append the (potentially modified) line to the updated content
+	            updatedContent.append(String.join(";", datos)).append("\n");
+	        }
+	        
+	        // Write the updated content back to the file
+	        try (FileWriter writer = new FileWriter(CLIENTES_REGISTRADOS)) {
+	            writer.write(updatedContent.toString());
+	        }
+
+	        // Close the administration window and open the login window
+	        dispose();
+	        VentanaLogin login = new VentanaLogin();
+	        login.setVisible(true);
+
+	    } catch (FileNotFoundException e) {
+	        JOptionPane.showMessageDialog(this, "Error: No se pudo encontrar el archivo de usuarios.",
+	                "Archivo No Encontrado", JOptionPane.ERROR_MESSAGE);
+	        e.printStackTrace();
+	    } catch (IOException e) {
+	        JOptionPane.showMessageDialog(this, "Error: Problema al leer el archivo de usuarios.",
+	                "Error de Lectura", JOptionPane.ERROR_MESSAGE);
+	        e.printStackTrace();
+	    }
 	}
 
 }

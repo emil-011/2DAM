@@ -2,6 +2,10 @@ package gui;
 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import utils.Usuario;
+import main.MainApp;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -14,7 +18,11 @@ import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JPasswordField;
 import java.awt.event.KeyAdapter;
@@ -130,48 +138,77 @@ public class LoginUsuario extends JPanel {
 	}
 
 	protected void iniciarSesion() {
-		String usuario = txtUsuario.getText();
-		char[] password = passwordField.getPassword();
-		String passwordString = new String(password);
-		String perfilUsuario = "";
+	    String usuario = txtUsuario.getText();
+	    char[] password = passwordField.getPassword();
+	    String passwordString = new String(password);
+	    String perfilUsuario = "";
+	    boolean inicioExitoso = false;
 
-		try (BufferedReader reader = new BufferedReader(new FileReader(USUARIOS_REGISTRADOS))) {
-			String linea;
-			boolean inicioExitoso = false;
+	    StringBuilder updatedContent = new StringBuilder();
+	    SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
+	    Usuario usuarioLogeado = null;
 
-			while ((linea = reader.readLine()) != null) {
-				String[] camposUsuario = linea.trim().split(";");
+	    try (BufferedReader reader = new BufferedReader(new FileReader(USUARIOS_REGISTRADOS))) {
+	        String linea;
 
-				if (usuario.equals(camposUsuario[4]) && passwordString.equals(camposUsuario[5])) {
-					inicioExitoso = true;
-					perfilUsuario = camposUsuario[3];
-				}
-			}
+	        while ((linea = reader.readLine()) != null) {
+	            String[] camposUsuario = linea.trim().split(";");
+	            String nombre = camposUsuario[0];
+	            String apellidos = camposUsuario[1];
+	            Date fechaNacimiento = null;
 
-			if (inicioExitoso) {
-				if (perfilUsuario.equals("Cliente")) {
-					VentanaCliente ventanaCliente = new VentanaCliente();
-					ventanaCliente.setVisible(true);
-				} else {
-					VentanaAdministracion ventanaAdmin = new VentanaAdministracion();
-					ventanaAdmin.setVisible(true);
-				}
-				// Cierra ventana de login después de iniciar sesion
-				login.cerrarVentana();
-			} else {
-				JOptionPane.showMessageDialog(this, "Error: Usuario o contraseña incorrectos.",
-						"Error de Inicio de Sesión", JOptionPane.ERROR_MESSAGE);
-			}
+	            // Attempt to parse the date and handle exceptions
+	            try {
+	                fechaNacimiento = sdf.parse(camposUsuario[2]);
+	            } catch (ParseException e) {
+	            }
+	            String perfil = camposUsuario[3];
+	            String email = camposUsuario[4]; 
+	            String contrasenya = camposUsuario[5]; 
 
-		} catch (FileNotFoundException e) {
-			JOptionPane.showMessageDialog(this, "Error: No se pudo encontrar el archivo de usuarios.",
-					"Archivo No Encontrado", JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
-		} catch (IOException e) {
-			JOptionPane.showMessageDialog(this, "Error: Problema al leer el archivo de usuarios.", "Error de Lectura",
-					JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
-		}
+	            // Check if this is the correct user
+	            if (usuario.equals(email) && passwordString.equals(contrasenya)) {
+	                inicioExitoso = true;
+	                perfilUsuario = perfil;
+	                // Update login status to true for this user
+	                camposUsuario[6] = "true"; // Update active status
+	            }
+
+	            // Append updated line to StringBuilder
+	            updatedContent.append(String.join(";", camposUsuario)).append("\n");
+	            if (inicioExitoso) {
+	                usuarioLogeado = new Usuario(nombre, apellidos, fechaNacimiento, perfil, email, contrasenya, inicioExitoso);
+	            }
+	        }
+
+	        if (inicioExitoso) {
+	            // Write updated content back to the file
+	            try (FileWriter writer = new FileWriter(USUARIOS_REGISTRADOS)) {
+	                writer.write(updatedContent.toString());
+	            }
+
+	            // Redirect user based on profile
+	            if (perfilUsuario.equals("cliente")) {
+	                VentanaCliente ventanaCliente = new VentanaCliente(usuarioLogeado);
+	                ventanaCliente.setVisible(true);
+	            } else {
+	                VentanaAdministracion ventanaAdmin = new VentanaAdministracion();
+	                ventanaAdmin.setVisible(true);
+	            }
+	            login.cerrarVentana();
+	        } else {
+	            JOptionPane.showMessageDialog(this, "Error: Usuario o contraseña incorrectos.",
+	                    "Error de Inicio de Sesión", JOptionPane.ERROR_MESSAGE);
+	        }
+
+	    } catch (FileNotFoundException e) {
+	        JOptionPane.showMessageDialog(this, "Error: No se pudo encontrar el archivo de usuarios.",
+	                "Archivo No Encontrado", JOptionPane.ERROR_MESSAGE);
+	        e.printStackTrace();
+	    } catch (IOException e) {
+	        JOptionPane.showMessageDialog(this, "Error: Problema al leer el archivo de usuarios.", "Error de Lectura",
+	                JOptionPane.ERROR_MESSAGE);
+	        e.printStackTrace();
+	    }
 	}
-
 }

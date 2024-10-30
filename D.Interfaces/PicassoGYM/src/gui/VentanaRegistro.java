@@ -184,11 +184,12 @@ public class VentanaRegistro extends JFrame {
 				String perfil = comboBox.getSelectedItem().toString();
 				String email = txtEmail.getText();
 				char[] contrasenya = passwordField.getPassword();
+				String passwordString = new String(contrasenya);
 				char[] contrasenyaConfirmada = passwordFieldConfirmation.getPassword();
 				boolean estaLoggeado = false;
 
 				if (Arrays.equals(contrasenya, contrasenyaConfirmada)) {
-					Usuario usuario = new Usuario(nombre, apellidos, fechaNacimiento, perfil, email, contrasenya,
+					Usuario usuario = new Usuario(nombre, apellidos, fechaNacimiento, perfil, email, passwordString,
 							estaLoggeado);
 
 					writer.write(usuario.toString());

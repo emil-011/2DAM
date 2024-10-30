@@ -10,11 +10,11 @@ public class Usuario {
 	private Date fechaNacimiento;
 	private String perfil;
 	private String email;
-	private char[] contrasenya;
+	private String contrasenya;
 	private boolean isLogged;
 
 	public Usuario(String nombre, String apellidos, Date fechaNacimiento, String perfil, String email,
-			char[] contrasenya, boolean isLogged) {
+			String contrasenya, boolean isLogged) {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.fechaNacimiento = fechaNacimiento;
