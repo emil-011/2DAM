@@ -25,6 +25,7 @@ public class FirmaApp {
 			System.err.println(
 					"USO: \nFirmaApp <archivo> <password> " + "\narchivo - archivo del que se quiere obtener la firma "
 							+ "\npassword - Password para desbloquear la clave privada");
+			return;
 		}
 
 		String file = args[0];
