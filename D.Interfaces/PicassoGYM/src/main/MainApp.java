@@ -25,7 +25,7 @@ public class MainApp {
 				VentanaCliente ventanaCliente = new VentanaCliente(checkLoggedInUser());
 				ventanaCliente.setVisible(true);
 			} else {
-				VentanaAdministracion ventanaAdmin = new VentanaAdministracion();
+				VentanaAdministracion ventanaAdmin = new VentanaAdministracion(checkLoggedInUser());
 				ventanaAdmin.setVisible(true);
 			}
 		} else {

@@ -188,7 +188,7 @@ public class VentanaAdministracion extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				cerrarSesion();
+				cerrarSesion(usuario);
 			}
 		});
 		lblCerrarSesion.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -198,42 +198,16 @@ public class VentanaAdministracion extends JFrame {
 		centerPanel.add(lblCerrarSesion);
 	}
 
-	protected void cerrarSesion() {
-	    StringBuilder updatedContent = new StringBuilder();
+	protected void cerrarSesion(Usuario usuario) {
+	    // Cambiar el estado del usuario a no logueado
+	    usuario.setLogged(false);
 
-	    try (BufferedReader reader = new BufferedReader(new FileReader(CLIENTES_REGISTRADOS))) {
-	        String line;
-	        
-	        while ((line = reader.readLine()) != null) {
-	            String[] datos = line.trim().split(";");
-	            
-	            if (datos[6].equals("true")) {
-	                datos[6] = "false";
-	            }
-	            
-	            // Append the (potentially modified) line to the updated content
-	            updatedContent.append(String.join(";", datos)).append("\n");
-	        }
-	        
-	        // Write the updated content back to the file
-	        try (FileWriter writer = new FileWriter(CLIENTES_REGISTRADOS)) {
-	            writer.write(updatedContent.toString());
-	        }
+	    // Cerrar la ventana actual
+	    dispose();
 
-	        // Close the administration window and open the login window
-	        dispose();
-	        VentanaLogin login = new VentanaLogin();
-	        login.setVisible(true);
-
-	    } catch (FileNotFoundException e) {
-	        JOptionPane.showMessageDialog(this, "Error: No se pudo encontrar el archivo de usuarios.",
-	                "Archivo No Encontrado", JOptionPane.ERROR_MESSAGE);
-	        e.printStackTrace();
-	    } catch (IOException e) {
-	        JOptionPane.showMessageDialog(this, "Error: Problema al leer el archivo de usuarios.",
-	                "Error de Lectura", JOptionPane.ERROR_MESSAGE);
-	        e.printStackTrace();
-	    }
+	    // Mostrar la ventana de login
+	    VentanaLogin login = new VentanaLogin();
+	    login.setVisible(true);
 	}
 
 }

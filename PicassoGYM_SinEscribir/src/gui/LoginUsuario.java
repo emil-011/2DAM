@@ -4,6 +4,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import utils.Usuario;
+import main.MainApp;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -136,78 +138,40 @@ public class LoginUsuario extends JPanel {
 	}
 
 	protected void iniciarSesion() {
-		String usuario = txtUsuario.getText();
-		char[] password = passwordField.getPassword();
-		String passwordString = new String(password);
-		String perfilUsuario = "";
-		boolean inicioExitoso = false;
+		String username = txtUsuario.getText().trim();
+		String contrasenya = new String(passwordField.getPassword()).trim();
 
-		StringBuilder updatedContent = new StringBuilder();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
-		Usuario usuarioLogeado = null;
+		// Verifica si se ingresaron las credenciales
+		if (username.isEmpty() || contrasenya.isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Por favor, complete ambos campos.", "Error",
+					JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 
-		try (BufferedReader reader = new BufferedReader(new FileReader(USUARIOS_REGISTRADOS))) {
-			String linea;
+		// Busca el usuario en la lista de usuarios registrados
+		for (Usuario usuario : MainApp.getUsuariosRegistrados()) {
+			if (usuario.getEmail().equals(username) && usuario.getContrasenya().equals(contrasenya)) {
+				// Usuario encontrado, marcarlo como logueado
+				usuario.setLogged(true);
+				JOptionPane.showMessageDialog(this, "¡Inicio de sesión exitoso!", "Éxito",
+						JOptionPane.INFORMATION_MESSAGE);
+				login.dispose();
 
-			while ((linea = reader.readLine()) != null) {
-				String[] camposUsuario = linea.trim().split(";");
-				String nombre = camposUsuario[0];
-				String apellidos = camposUsuario[1];
-				Date fechaNacimiento = null;
-
-				// Attempt to parse the date and handle exceptions
-				try {
-					fechaNacimiento = sdf.parse(camposUsuario[2]);
-				} catch (ParseException e) {
-				}
-				String perfil = camposUsuario[3];
-				String email = camposUsuario[4];
-				String contrasenya = camposUsuario[5];
-
-				// Check if this is the correct user
-				if (usuario.equals(email) && passwordString.equals(contrasenya)) {
-					inicioExitoso = true;
-					perfilUsuario = perfil;
-					// Update login status to true for this user
-					camposUsuario[6] = "true"; // Update active status
-				}
-
-				// Append updated line to StringBuilder
-				updatedContent.append(String.join(";", camposUsuario)).append("\n");
-				if (inicioExitoso) {
-					usuarioLogeado = new Usuario(nombre, apellidos, fechaNacimiento, perfil, email, contrasenya,
-							inicioExitoso);
-				}
-			}
-
-			if (inicioExitoso) {
-				// Write updated content back to the file
-				try (FileWriter writer = new FileWriter(USUARIOS_REGISTRADOS)) {
-					writer.write(updatedContent.toString());
-				}
-
-				// Redirect user based on profile
-				if (perfilUsuario.equals("Cliente")) {
-					VentanaCliente ventanaCliente = new VentanaCliente(usuarioLogeado);
+				// Abre la ventana correspondiente según el perfil del usuario
+				if (usuario.getPerfil().equals("Cliente")) {
+					VentanaCliente ventanaCliente = new VentanaCliente(usuario);
 					ventanaCliente.setVisible(true);
 				} else {
-					VentanaAdministracion ventanaAdmin = new VentanaAdministracion(usuarioLogeado);
+					VentanaAdministracion ventanaAdmin = new VentanaAdministracion(usuario);
 					ventanaAdmin.setVisible(true);
 				}
-				login.cerrarVentana();
-			} else {
-				JOptionPane.showMessageDialog(this, "Error: Usuario o contraseña incorrectos.",
-						"Error de Inicio de Sesión", JOptionPane.ERROR_MESSAGE);
+				return;
 			}
-
-		} catch (FileNotFoundException e) {
-			JOptionPane.showMessageDialog(this, "Error: No se pudo encontrar el archivo de usuarios.",
-					"Archivo No Encontrado", JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
-		} catch (IOException e) {
-			JOptionPane.showMessageDialog(this, "Error: Problema al leer el archivo de usuarios.", "Error de Lectura",
-					JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
 		}
+
+		// Si no se encontró al usuario o las credenciales son incorrectas
+		JOptionPane.showMessageDialog(this, "Credenciales incorrectas. Inténtalo de nuevo.", "Error",
+				JOptionPane.ERROR_MESSAGE);
+
 	}
 }
