@@ -3,6 +3,8 @@ package gui;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+
 import utils.Usuario;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -11,6 +13,9 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
@@ -37,6 +42,14 @@ public class LoginUsuario extends JPanel {
 	private static final String USUARIOS_REGISTRADOS = "usuarios_registrados.csv";
 
 	public LoginUsuario(VentanaLogin login) {
+
+		try {
+			UIManager.setLookAndFeel(new FlatMacDarkLaf());
+		} catch (UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		this.login = login;
 		setBackground(new Color(183, 243, 249));
 		setBorder(new EmptyBorder(5, 5, 5, 5));

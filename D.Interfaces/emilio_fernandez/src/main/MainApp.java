@@ -1,22 +1,15 @@
 package main;
 
-import gui.VentanaCliente;
-import gui.VentanaAdministracion;
-import gui.VentanaLogin;
-import utils.Usuario;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import com.formdev.flatlaf.FlatIntelliJLaf;
-import com.formdev.flatlaf.themes.FlatMacDarkLaf;
-
+import gui.VentanaEntrenador;
+import gui.VentanaJugador;
+import gui.VentanaLogin;
+import utils.Usuario;
 
 public class MainApp {
 
@@ -26,20 +19,13 @@ public class MainApp {
 		Usuario usuarioLogueado = checkLoggedInUser();
 
 		if (usuarioLogueado != null) {
-			try {
-				UIManager.setLookAndFeel(new FlatMacDarkLaf());
-			} catch (UnsupportedLookAndFeelException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			// User is logged in, open the corresponding window based on user profile
 			String perfil = usuarioLogueado.getPerfil();
-			if (perfil.equals("cliente")) {
-				VentanaCliente ventanaCliente = new VentanaCliente(checkLoggedInUser());
-				ventanaCliente.setVisible(true);
+			if (perfil.equals("Jugador/a")) {
+				VentanaJugador ventana = new VentanaJugador(checkLoggedInUser());
+				ventana.setVisible(true);
 			} else {
-				VentanaAdministracion ventanaAdmin = new VentanaAdministracion(checkLoggedInUser());
-				ventanaAdmin.setVisible(true);
+				VentanaEntrenador ventana = new VentanaEntrenador(checkLoggedInUser());
+				ventana.setVisible(true);
 			}
 		} else {
 			// No user is logged in, show the login window

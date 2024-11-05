@@ -6,6 +6,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/Emi/Desktop/LookAndFeel/src/resources/flatlaf-3.5.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alumnado2DAM/Desktop/2DAM/D.Interfaces/LookAndFeel/src/resources/flatlaf-3.5.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
