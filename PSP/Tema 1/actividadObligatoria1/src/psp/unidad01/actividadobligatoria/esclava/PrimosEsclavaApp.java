@@ -1,55 +1,40 @@
 package psp.unidad01.actividadobligatoria.esclava;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PrimosEsclavaApp {
 	public static void main(String[] args) {
-		// Creamos las listas
-		List<Integer> listaNumeros = new ArrayList<>();
-		List<Integer> listaPrimos = new ArrayList<>();
-
-		// Leemos la entrada
-		try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-			String linea;
-			while ((linea = reader.readLine()) != null) {
-				// Añadimos los numeros a la lista
-				int numero = Integer.parseInt(linea.trim());
-				listaNumeros.add(numero);
-
-			}
-
-			// Comprobamos si es primo y lo añadimos a la lista de primos
-			for (int numeroLista : listaNumeros) {
-				if (esPrimo(numeroLista)) {
-					listaPrimos.add(numeroLista);
-				}
-			}
-
-		} catch (IOException | NumberFormatException e) {
-			System.err.println("Error al leer los datos: " + e.getMessage());
+		if (args.length != 2) {
+			System.err.println("Error: Debes proporcionar el rango <Inicio> <Fin> para procesar los números.");
 			return;
 		}
 
-		System.out.println("La longitud de la lista de primos es: " + listaPrimos.size());
-		System.out.println("Números primos encontrados:");
+		int inicio = Integer.parseInt(args[0]);
+		int fin = Integer.parseInt(args[1]);
+
+		// Creamos la lista para almacenar los primos encontrados
+		List<Integer> listaPrimos = new ArrayList<>();
+
+		// Comprobamos si cada número en el rango es primo
+		for (int numero = inicio; numero <= fin; numero++) {
+			if (esPrimo(numero)) {
+				listaPrimos.add(numero);
+			}
+		}
+
+		// Imprimimos los números primos encontrados
 		for (int primo : listaPrimos) {
 			System.out.println(primo);
 		}
-		System.out.println("-----------------------------------------");
-
 	}
 
 	// Metodo para averiguar si es primo
 	private static boolean esPrimo(int num) {
 		if (num <= 1)
 			return false;
-		if (num <= 3)
+		if (num == 2 || num == 3)
 			return true;
-		// Si es par o multiplo de tres no es primo
 		if (num % 2 == 0 || num % 3 == 0)
 			return false;
 
@@ -60,5 +45,4 @@ public class PrimosEsclavaApp {
 		}
 		return true;
 	}
-
 }
