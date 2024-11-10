@@ -2,6 +2,12 @@ package psp.unidad01.actividadobligatoria;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class PrimosMaestraApp {
 	private static final int VALOR_MINIMO = 2;
@@ -10,7 +16,11 @@ public class PrimosMaestraApp {
 
 	public static void main(String[] args) {
 		if (args.length < 2 || args.length > 3) {
-			System.err.println("Error: Debes proporcionar al menos dos parámetros <Inicio> <Fin> del rango");
+			System.err.println("Insuficiento número de parámetros\nUSO: \n"
+					+ "java -jar maestra.jar valor1 valor2 valor3\n"
+					+ "valor1 -> (obligatorio) primer extremo del rango de valores a analizar (entre 2 y 2.147.483.647)\n"
+					+ "valor2 -> (obligatorio)segundo extremo del rango de valores a analizar (entre 2 y 2.147.483.647)\n"
+					+ "valor3 -> (opcional) número de procesos a lanzar. Su equipo tiene 4 núcleos\n" );
 			return;
 		}
 
@@ -22,13 +32,15 @@ public class PrimosMaestraApp {
 			inicio = Integer.parseInt(args[0]);
 			fin = Integer.parseInt(args[1]);
 
-			// Validar que los parámetros estén en el rango adecuado
 			if (inicio < VALOR_MINIMO || fin < VALOR_MINIMO || inicio > VALOR_MAXIMO || fin > VALOR_MAXIMO) {
-				System.err.println("Error: Los parámetros de inicio y fin deben ser valores dentro del rango válido.");
+				System.err.println("Enteros no válidos, valores válidos entre 2 y 2.147.483.647\nUSO:\n"
+						+ "java -jar maestra.jar valor1 valor2 valor3\n"
+						+ "valor1 -> (obligatorio) primer extremo del rango de valores a analizar (entre 2 y 2.147.483.647)\n"
+						+ "valor2 -> (obligatorio)segundo extremo del rango de valores a analizar (entre 2 y 2.147.483.647)\n"
+						+ "valor3 -> (opcional) número de procesos a lanzar. Su equipo tiene " + numNucleos + " núcleos");
 				return;
 			}
 
-			// Si hay 3 parámetros, tomamos el valor para el número de procesadores
 			if (args.length == 3) {
 				numNucleos = Integer.parseInt(args[2]);
 				if (numNucleos > PROCESADORES_DISPONIBLES) {
@@ -42,14 +54,16 @@ public class PrimosMaestraApp {
 			return;
 		}
 
-		// Cálculo del rango por proceso
 		int rangoPorProceso = (fin - inicio + 1) / numNucleos;
 		if (rangoPorProceso == 0) {
 			System.err.println("Error: El rango es demasiado pequeño para los núcleos disponibles.");
 			return;
 		}
 
-		System.out.print("[");
+		long tiempoInicioPrograma = System.currentTimeMillis();
+		int totalPrimos = 0;
+		int totalAnalizados = 0;
+		List<Integer> primosGlobales = new ArrayList();
 
 		for (int i = 0; i < numNucleos; i++) {
 			int subInicio = inicio + i * rangoPorProceso;
@@ -60,23 +74,57 @@ public class PrimosMaestraApp {
 					String.valueOf(subFin));
 
 			try {
+				long tiempoInicioProceso = System.currentTimeMillis();
 				Process procesoEsclavo = proceso.start();
+
+				int primosEncontrados = 0;
+				int numerosAnalizados = subFin - subInicio + 1;
 
 				try (BufferedReader reader = new BufferedReader(
 						new InputStreamReader(procesoEsclavo.getInputStream()))) {
 					String line;
 					while ((line = reader.readLine()) != null) {
-						System.out.print(line + ", ");
+						primosGlobales.add(Integer.parseInt(line)); // Add primes to set to avoid duplicates
+						primosEncontrados++;
 					}
 				}
 
 				procesoEsclavo.waitFor();
+				long tiempoFinProceso = System.currentTimeMillis();
+				long tiempoProceso = tiempoFinProceso - tiempoInicioProceso;
+
+				System.out.printf(
+						"Proceso P%d tiempo empleado: %d ms se han encontrado: %d números primos entre los %d analizados%n",
+						i, tiempoProceso, primosEncontrados, numerosAnalizados);
+
+				totalPrimos += primosEncontrados;
+				totalAnalizados += numerosAnalizados;
 
 			} catch (Exception e) {
 				System.err.println("Error al ejecutar el proceso esclavo: " + e.getMessage());
 			}
 		}
 
-		System.out.println("]");
+		long tiempoFinPrograma = System.currentTimeMillis();
+		long tiempoTotal = tiempoFinPrograma - tiempoInicioPrograma;
+
+		System.out.printf(
+				"Tiempo total empleado en el programa: %d ms se han encontrado %d números primos entre los %d analizados%n",
+				tiempoTotal, totalPrimos, totalAnalizados);
+		
+		Collections.sort(primosGlobales);
+
+		// Print all unique prime numbers found at the end, with a newline after every
+		// 10 numbers
+		System.out.print("[");
+		int count = 0;
+		for (Integer primo : primosGlobales) {
+			System.out.print(primo + ", ");
+			count++;
+			if (count % 25 == 0) {
+				System.out.println();
+			}
+		}
+		System.out.print("]");
 	}
 }
