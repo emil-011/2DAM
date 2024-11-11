@@ -31,10 +31,13 @@ public class PrimosEsclavaApp {
 
 	// Metodo para averiguar si es primo
 	private static boolean esPrimo(int num) {
+
 		if (num <= 1)
 			return false;
 		if (num == 2 || num == 3)
 			return true;
+		// Si es par o multiplo de 3 devolvemos false
+		// esto hace mucho mas eficaz el método
 		if (num % 2 == 0 || num % 3 == 0)
 			return false;
 
