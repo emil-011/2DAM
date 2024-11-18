@@ -1,8 +1,8 @@
 nombreApellidos=Paco Lopez
-fechaNacimiento=10/02/1985
-telefonoFijo=999999999
-telefonoMovil=666666666
+fechaNacimiento=01/01/2005
+telefonoFijo=525252525
+telefonoMovil=655834969
 numeroHijos=2
-comunidad=Andalucia
-localidad=Malaga
+comunidad=Andalucía
+localidad=Rincón de la Victoria
 intereses=Lectura,Series,Actividades al aire libre,deportes
