@@ -16,7 +16,7 @@ public class MainApp extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 
-			loader.setLocation(MainApp.class.getResource("/views/VentanaMain.fxml"));
+			loader.setLocation(MainApp.class.getResource("/views/VentanaDescubrir.fxml"));
 
 			Pane ventana = (Pane) loader.load();
 

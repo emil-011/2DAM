@@ -37,6 +37,8 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("AddressApp");
+        
+        primaryStage.setFullScreen(true);
 
         initRootLayout();
 
