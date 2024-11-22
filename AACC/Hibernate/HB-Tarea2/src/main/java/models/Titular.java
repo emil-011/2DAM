@@ -2,18 +2,32 @@ package models;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "titular")
 public class Titular {
+	@Id
     private String dniTitular;
+	@Column
     private String nombre;
+	@Column
     private String domicilio;
+	@Column
     private String codRest;
     
     // Uno a muchos de titular
     @OneToMany(mappedBy = "titular")
     private List<Restaurante> listaRestaurantes;
 
+    public Titular() {
+    	
+    }
+    
     // Constructor
     public Titular(String dniTitular, String nombre, String domicilio, String codRest) {
         this.dniTitular = dniTitular;

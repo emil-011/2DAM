@@ -2,14 +2,27 @@ package models;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "localidad")
 public class Localidad {
+	@Id
+	@Column(name = "cod_localidad")
     private int codLocalidad;
-    private String nombre;
+  
+	private String nombre;
     
     @OneToMany(mappedBy = "localidad")
     private List<Restaurante> listaRestaurantes;
+    
+    public Localidad() {
+    	
+    }
 
     // Constructor
     public Localidad(int codLocalidad, String nombre) {

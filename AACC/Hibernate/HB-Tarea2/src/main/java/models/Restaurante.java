@@ -3,46 +3,64 @@ package models;
 import java.sql.Date;
 import java.util.List;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "restaurante")
 public class Restaurante {
+    @Id
+    @Column(columnDefinition = "char(4)", name = "cod_rest")
     private String codRest;
-    private String nombre;
-    private String licenciaFiscal;
-    private String domicilio;
-    private Date fechaApertura;
-    private String horario;
-    private int codLocalidad;
     
+    @Column
+    private String nombre;
+    
+    @Column(columnDefinition = "char(10)", name = "licencia_fiscal")
+    private String licenciaFiscal;
+    
+    @Column
+    private String domicilio;
+    
+    @Column(name = "fecha_apertura")
+    private Date fechaApertura;
+    
+    @Column
+    private String horario;
+
     // Relación muchos a uno
     @ManyToOne
-    @JoinColumn(name = "cod_rest")
+    @JoinColumn(name = "cod_rest", insertable = false, updatable = false)
     private Titular titular;
     
+    // Relación uno a uno con Localidad
     @OneToOne
     @JoinColumn(name = "cod_localidad")
     private Localidad localidad;
     
     @OneToMany(mappedBy = "restaurante")
     private List<Existencias> listaExistencias;
-    
+
     // Constructor
     public Restaurante() {
     }
 
     // Constructor
     public Restaurante(String codRest, String nombre, String licenciaFiscal, String domicilio, 
-                       Date fechaApertura, String horario, int codLocalidad) {
+                       Date fechaApertura, String horario, Localidad localidad) {
         this.codRest = codRest;
         this.nombre = nombre;
         this.licenciaFiscal = licenciaFiscal;
         this.domicilio = domicilio;
         this.fechaApertura = fechaApertura;
         this.horario = horario;
-        this.codLocalidad = codLocalidad;
+        this.localidad = localidad;
     }
 
     // Getters and Setters
@@ -94,11 +112,11 @@ public class Restaurante {
         this.horario = horario;
     }
 
-    public int getCodLocalidad() {
-        return codLocalidad;
+    public Localidad getLocalidad() {
+        return localidad;
     }
 
-    public void setCodLocalidad(int codLocalidad) {
-        this.codLocalidad = codLocalidad;
+    public void setLocalidad(Localidad localidad) {
+        this.localidad = localidad;
     }
 }
