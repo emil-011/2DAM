@@ -110,7 +110,7 @@ public class Valida {
 	}
 
 	protected static boolean validarPassword(String password, int linea) {
-		if (!password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[.,;:/\\*&%$()]).{8,16}$")) {
+		if (!password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[.;:/\\*&%$()]).{8,16}$")) {
 			System.err.printf("Error en la línea %d: Password inválida '%s'%n", linea, password);
 			return false;
 		}

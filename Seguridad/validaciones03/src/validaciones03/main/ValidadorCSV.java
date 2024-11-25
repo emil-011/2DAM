@@ -37,7 +37,7 @@ public class ValidadorCSV {
 		}
 	}
 
-	// Divide las líneas del CSV y omite las comillas.
+	// Divide las líneas del CSV
 	private static String[] parseCSVLine(String linea) {
 		return linea.split(",");
 	}
