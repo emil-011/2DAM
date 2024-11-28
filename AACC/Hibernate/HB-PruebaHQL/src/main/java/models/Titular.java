@@ -5,6 +5,8 @@ import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -21,8 +23,9 @@ public class Titular {
     private String codRest;
     
     // Uno a muchos de titular
-    @OneToMany(mappedBy = "titular")
-    private List<Restaurante> listaRestaurantes;
+    @ManyToOne
+    @JoinColumn(name= "cod_rest")
+    private Restaurante restaurante;
 
     public Titular() {
     	

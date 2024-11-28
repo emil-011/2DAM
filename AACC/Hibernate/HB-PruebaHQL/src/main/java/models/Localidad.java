@@ -15,6 +15,7 @@ public class Localidad {
 	@Column(name = "cod_localidad")
     private int codLocalidad;
   
+	@Column
 	private String nombre;
     
     @OneToMany(mappedBy = "localidad")

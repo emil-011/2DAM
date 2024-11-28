@@ -1,8 +1,10 @@
 package models;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -34,10 +36,8 @@ public class Restaurante {
     @Column
     private String horario;
 
-    // Relación muchos a uno
-    @ManyToOne
-    @JoinColumn(name = "cod_rest", insertable = false, updatable = false)
-    private Titular titular;
+	@OneToMany(mappedBy="restaurante",cascade= CascadeType.ALL)
+	private List<Titular> titulares = new ArrayList<>();
     
     // Relación uno a uno con Localidad
     @OneToOne
