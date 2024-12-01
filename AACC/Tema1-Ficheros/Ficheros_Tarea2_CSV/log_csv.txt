@@ -1,0 +1,5 @@
+Método: fichero_CSV_To_Binario, Fecha y hora: 2024-10-23 18:46:59, Archivo entrada: archivos/datos.csv, Archivo salida: archivos/datos.dat
+Método: fichero_Binario_To_CSV, Fecha y hora: 2024-10-23 18:46:59, Archivo entrada: archivos/datos.dat, Archivo salida: archivos/datos.csv
+Método: ordenar_Archivo_CSV, Fecha y hora: 2024-10-23 18:46:59, Archivo entrada: archivos/datos.csv, Archivo salida: archivos/datos_ord.csv
+Método: ordenar_Archivo_Binario, Fecha y hora: 2024-10-23 18:46:59, Archivo entrada: archivos/datos.dat, Archivo salida: archivos/datos_ord.dat
+Método: fichero_Binario_To_CSV_Ordenado, Fecha y hora: 2024-10-23 18:46:59, Archivo entrada: archivos/datos.dat, Archivo salida: archivos/datos_ord.csv

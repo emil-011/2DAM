@@ -1,0 +1,6 @@
+Se ha encontrado la letra A un total de 131 veces en el archivo de texto TextoVocales.txt | El tiempo total del programa fue: 1 ms.
+Se ha encontrado la letra E un total de 115 veces en el archivo de texto TextoVocales.txt | El tiempo total del programa fue: 1 ms.
+Se ha encontrado la letra I un total de 33 veces en el archivo de texto TextoVocales.txt | El tiempo total del programa fue: 1 ms.
+Se ha encontrado la letra O un total de 88 veces en el archivo de texto TextoVocales.txt | El tiempo total del programa fue: 1 ms.
+Se ha encontrado la letra U un total de 50 veces en el archivo de texto TextoVocales.txt | El tiempo total del programa fue: 1 ms.
+Se han encontrado un total de: 417 | Tiempo total: 5 ms.
