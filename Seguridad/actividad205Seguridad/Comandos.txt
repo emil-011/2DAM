@@ -1,9 +1,0 @@
-Comandos Certificados 
-
-Crear Almacen: keytool -genkeypair -keyalg RSA -keysize 2048 -keystore <nombreAlmacen> -alias emilio -validity <diasDisponible>
-
-Exportar Certificado: keytool -exportcert -alias <alias> -keystore <nombre_almacen> -rfc -file <nombre_archivo>
-
-Ver Listado de Claves: keytool -list -keystore <nombreAlmacen>
-
-Importar certificado: keytool -importcert -alias <alias> -file <archivo_certificado.cer> -keystore <almacen_claves.jks>

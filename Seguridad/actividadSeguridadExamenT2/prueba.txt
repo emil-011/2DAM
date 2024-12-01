@@ -1,2 +1,0 @@
-Archivo de prueba, si lo pruebas y funciona es síntoma de que fue bien la prueba.
-Si lo pruebas y no funciona algo estarás haciendo mal.
