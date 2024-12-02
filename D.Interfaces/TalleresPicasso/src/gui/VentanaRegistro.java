@@ -49,6 +49,8 @@ public class VentanaRegistro extends JDialog {
 	private JLabel lblPassConfirmed;
 	private JLabel lblMetodoContacto;
 	private JPanel panel;
+	private JPanel panel_1;
+	private JPanel panel_2;
 	private JRadioButton rdbEmail;
 	private JRadioButton rdbTelefono;
 	private final ButtonGroup radioButtonGroup = new ButtonGroup();
@@ -63,7 +65,7 @@ public class VentanaRegistro extends JDialog {
 	 */
 	public VentanaRegistro(JFrame parent) {
 		super(parent, "Registro", true);
-		inicializarComponentes();		
+		inicializarComponentes();
 	}
 
 	private void inicializarComponentes() {
@@ -75,6 +77,7 @@ public class VentanaRegistro extends JDialog {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE); // Cierra la ventana modal al hacer click en la "X"
 		setBounds(750, 300, 500, 500);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(128, 170, 202));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -90,9 +93,11 @@ public class VentanaRegistro extends JDialog {
 		banner.add(lblNewLabel_1);
 
 		bottomPanel = new JPanel();
+		bottomPanel.setBackground(new Color(128, 170, 202));
 		contentPane.add(bottomPanel, BorderLayout.SOUTH);
 
 		lblNewLabel = new JLabel("     ");
+		lblNewLabel.setBackground(new Color(128, 170, 202));
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 54));
 		bottomPanel.add(lblNewLabel);
 
@@ -120,9 +125,16 @@ public class VentanaRegistro extends JDialog {
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 54));
 		bottomPanel.add(lblNewLabel_2);
 
+		panel_1 = new JPanel();
+		contentPane.add(panel_1, BorderLayout.CENTER);
+		panel_1.setLayout(new BorderLayout(0, 0));
+
+		panel_2 = new JPanel();
+		panel_1.add(panel_2, BorderLayout.NORTH);
+
 		centerPanel = new JPanel();
-		contentPane.add(centerPanel, BorderLayout.CENTER);
-		centerPanel.setLayout(new GridLayout(0, 2, 10, 10));
+		panel_1.add(centerPanel, BorderLayout.CENTER); // Ajuste importante
+		centerPanel.setLayout(new GridLayout(0, 2, 10, 10)); // Cambia filas dinámicas y columnas fijas
 
 		lblNombre = new JLabel("Nombre");
 		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
@@ -163,14 +175,14 @@ public class VentanaRegistro extends JDialog {
 		passwordField = new JPasswordField();
 		centerPanel.add(passwordField);
 
-		lblPassConfirmed = new JLabel("Confirma Contrasela");
+		lblPassConfirmed = new JLabel("Confirma Contraseña");
 		lblPassConfirmed.setHorizontalAlignment(SwingConstants.CENTER);
 		centerPanel.add(lblPassConfirmed);
 
 		passwordFieldConfirm = new JPasswordField();
 		centerPanel.add(passwordFieldConfirm);
 
-		lblMetodoContacto = new JLabel("Metodo de Contacto");
+		lblMetodoContacto = new JLabel("Método de Contacto");
 		lblMetodoContacto.setHorizontalAlignment(SwingConstants.CENTER);
 		centerPanel.add(lblMetodoContacto);
 
@@ -190,43 +202,42 @@ public class VentanaRegistro extends JDialog {
 	}
 
 	protected void crearCliente() {
-	    String nombre = txtNombre.getText();
-	    String apellido = txtApellidos.getText();
-	    String telefono = txtTelefono.getText();
-	    String email = txtEmail.getText();
-	    String pass = new String(passwordField.getPassword());
-	    String passConfirmed = new String(passwordFieldConfirm.getPassword());
+		String nombre = txtNombre.getText();
+		String apellido = txtApellidos.getText();
+		String telefono = txtTelefono.getText();
+		String email = txtEmail.getText();
+		String pass = new String(passwordField.getPassword());
+		String passConfirmed = new String(passwordFieldConfirm.getPassword());
 
-	    // Validar que las contraseñas coincidan
-	    if (!pass.equals(passConfirmed)) {
-	        JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden", "ERROR", JOptionPane.ERROR_MESSAGE);
-	        return; // Detener la ejecución del método
-	    }
+		// Validar que las contraseñas coincidan
+		if (!pass.equals(passConfirmed)) {
+			JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden", "ERROR", JOptionPane.ERROR_MESSAGE);
+			return; // Detener la ejecución del método
+		}
 
-	    // Verificar si el usuario ya existe
-	    boolean encontrado = false;
-	    for (Usuario us : TallerPicassoMainApp.listaUsuarios) {
-	        if (us.getEmail().equals(email)) {
-	            encontrado = true;
-	            break;
-	        }
-	    }
+		// Verificar si el usuario ya existe
+		boolean encontrado = false;
+		for (Usuario us : TallerPicassoMainApp.listaUsuarios) {
+			if (us.getEmail().equals(email)) {
+				encontrado = true;
+				break;
+			}
+		}
 
-	    if (encontrado) {
-	        JOptionPane.showMessageDialog(this, "El usuario ya existe", "ERROR", JOptionPane.ERROR_MESSAGE);
-	        return;
-	    }
-	    
-	    List<Cita> listaCitas = new ArrayList<>();
-	    // Crear un nuevo usuario y añadirlo a la lista
-	    Usuario nuevoUser = new Usuario(nombre, apellido, telefono, email, passConfirmed, false, listaCitas);
-	    TallerPicassoMainApp.listaUsuarios.add(nuevoUser);
+		if (encontrado) {
+			JOptionPane.showMessageDialog(this, "El usuario ya existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 
-	    JOptionPane.showMessageDialog(this, "Usuario creado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+		List<Cita> listaCitas = new ArrayList<>();
+		// Crear un nuevo usuario y añadirlo a la lista
+		Usuario nuevoUser = new Usuario(nombre, apellido, telefono, email, passConfirmed, false, listaCitas);
+		TallerPicassoMainApp.listaUsuarios.add(nuevoUser);
 
-	    // Opcional: Cerrar la ventana después de crear el usuario
-	    dispose();
+		JOptionPane.showMessageDialog(this, "Usuario creado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+		// Opcional: Cerrar la ventana después de crear el usuario
+		dispose();
 	}
-
 
 }

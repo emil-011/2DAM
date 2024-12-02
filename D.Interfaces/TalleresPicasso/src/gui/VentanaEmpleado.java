@@ -115,6 +115,8 @@ public class VentanaEmpleado extends JFrame {
 		optionsPanel.setLayout(new GridLayout(1, 2, 0, 0));
 		
 		lblCitaPrevia = new JLabel("Actualizar estado de reparacion");
+		lblCitaPrevia.setBackground(new Color(255, 255, 255));
+		lblCitaPrevia.setOpaque(true);
 		lblCitaPrevia.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -129,6 +131,8 @@ public class VentanaEmpleado extends JFrame {
 		optionsPanel.add(lblCitaPrevia);
 
 		lblReparaciones = new JLabel("Ver mis trabajos");
+		lblReparaciones.setOpaque(true);
+		lblReparaciones.setBackground(new Color(255, 255, 255));
 		lblReparaciones.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

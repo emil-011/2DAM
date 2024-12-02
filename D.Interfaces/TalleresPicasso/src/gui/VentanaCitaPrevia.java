@@ -33,7 +33,6 @@ public class VentanaCitaPrevia extends JDialog {
 	private JPanel banner;
 	private JPanel bottomPanel;
 	private JPanel centerPanel;
-	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
 	private JLabel lblMatricula;
 	private JLabel lblMarca;
@@ -64,6 +63,7 @@ public class VentanaCitaPrevia extends JDialog {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE); // Cierra la ventana modal al hacer click en la "X"
 		setBounds(750, 300, 800, 450);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(176, 204, 249));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -79,11 +79,8 @@ public class VentanaCitaPrevia extends JDialog {
 		banner.add(lblNewLabel_1);
 
 		bottomPanel = new JPanel();
+		bottomPanel.setBackground(new Color(176, 204, 249));
 		contentPane.add(bottomPanel, BorderLayout.SOUTH);
-
-		lblNewLabel = new JLabel("     ");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 54));
-		bottomPanel.add(lblNewLabel);
 
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.addMouseListener(new MouseAdapter() {
@@ -106,7 +103,7 @@ public class VentanaCitaPrevia extends JDialog {
 		bottomPanel.add(btnCancelar);
 
 		lblNewLabel_2 = new JLabel("     ");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 54));
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		bottomPanel.add(lblNewLabel_2);
 
 		centerPanel = new JPanel();

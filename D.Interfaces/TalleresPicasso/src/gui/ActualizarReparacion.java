@@ -130,7 +130,7 @@ public class ActualizarReparacion extends JDialog {
 		lblMatricula.setHorizontalAlignment(SwingConstants.CENTER);
 		centerPanel.add(lblMatricula);
 
-		comboBoxMatricula = new JComboBox();
+		comboBoxMatricula = new JComboBox<String>();
 		centerPanel.add(comboBoxMatricula);
 
 		lbl1 = new JLabel("Marca");

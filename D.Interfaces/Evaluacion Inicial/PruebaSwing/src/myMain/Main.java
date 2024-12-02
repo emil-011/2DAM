@@ -2,7 +2,7 @@ package myMain;
 
 import frame.Principal;
 
-public class main {
+public class Main {
  
 	public static void main(String[] args) {
 		Principal login = new Principal();
