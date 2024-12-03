@@ -54,9 +54,6 @@ public class ActualizarReparacion extends JDialog {
 	private JLabel lblObservaciones;
 	private JTextField textFieldObservaciones;
 
-	/**
-	 * Create the dialog.
-	 */
 	public ActualizarReparacion(JFrame parent, Usuario usuario) {
 		super(parent, "Registro", true);
 		inicializarComponentes(usuario);
@@ -130,7 +127,7 @@ public class ActualizarReparacion extends JDialog {
 		lblMatricula.setHorizontalAlignment(SwingConstants.CENTER);
 		centerPanel.add(lblMatricula);
 
-		comboBoxMatricula = new JComboBox();
+		comboBoxMatricula = new JComboBox<String>();
 		centerPanel.add(comboBoxMatricula);
 
 		lbl1 = new JLabel("Marca");

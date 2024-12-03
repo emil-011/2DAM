@@ -1,7 +1,5 @@
 package model;
 
-import java.time.Year;
-
 public class Pelicula {
 
 	private int film_id;

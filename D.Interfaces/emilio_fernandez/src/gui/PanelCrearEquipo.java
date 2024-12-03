@@ -6,14 +6,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
 import java.awt.Rectangle;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;

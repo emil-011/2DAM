@@ -1,24 +1,14 @@
 package gui;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-
 import java.awt.*;
-import com.toedter.calendar.JDateChooser;
-
 import utils.Producto;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
 
 public class AltaProducto extends JPanel {
+
+	private static final long serialVersionUID = 1L;
 	private JLabel lblAnyadir;
 	private JTextField textPrecio;
 	private JTextField textNombre;
@@ -120,9 +110,6 @@ public class AltaProducto extends JPanel {
 		chckbxPercedero.setPreferredSize(new Dimension(50, 50));
 		chckbxPercedero.setFont(new Font("Tahoma", Font.PLAIN, 54));
 		panelPerecedero.add(chckbxPercedero);
-
-		String[] provinciasAndalucia = { "Almería", "Cádiz", "Córdoba", "Granada", "Huelva", "Jaén", "Málaga",
-				"Sevilla" };
 	}
 
 	// Metodo para agregar productos

@@ -1,7 +1,5 @@
 package frame;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -21,9 +19,6 @@ public class Principal extends JFrame {
 	private JTextField textPswd;
 	private JLabel lblNewLabel;
 
-	/**
-	 * Create the frame.
-	 */
 	public Principal() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/resources/besos.jpg")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

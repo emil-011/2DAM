@@ -6,6 +6,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class BajaProducto extends JPanel {
+
+	private static final long serialVersionUID = 1L;
 	private JLabel lblEliminar;
 	private TablaProducto tablaProductos; // Instancia de la tabla
 

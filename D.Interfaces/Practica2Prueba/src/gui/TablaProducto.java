@@ -15,6 +15,7 @@ import java.util.List;
 
 public class TablaProducto extends JPanel {
 
+	private static final long serialVersionUID = 1L;
 	private JTable table;
 	private DefaultTableModel tableModel;
 	private static final String CSV_FILE_PRODUCTOS = "lista_productos.csv";

@@ -18,7 +18,8 @@ public class SumaFicheros {
             "archivos/rrhh.txt"
         };
 
-        CompletableFuture<Integer>[] futures = new CompletableFuture[archivos.length];
+        @SuppressWarnings("unchecked")
+		CompletableFuture<Integer>[] futures = new CompletableFuture[archivos.length];
 
         // Lanzamos un CompletableFuture para cada archivo
         for (int i = 0; i < archivos.length; i++) {

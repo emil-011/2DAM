@@ -42,6 +42,7 @@ public class MaestroSumadorApp {
 		int rangoPorProceso = (maximo - minimo + 1) / numeroProcesos;
 		int totalSuma = 0;
 
+		@SuppressWarnings("unchecked")
 		CompletableFuture<Integer>[] futures = new CompletableFuture[numeroProcesos];
 
 		for (int i = 0; i < numeroProcesos; i++) {

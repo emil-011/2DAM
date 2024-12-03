@@ -1,24 +1,16 @@
 package gui;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-
 import java.awt.*;
 import com.toedter.calendar.JDateChooser;
-
 import utils.Clientes;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 
 public class AltaCliente extends JPanel {
+	private static final long serialVersionUID = 1L;
 	private JLabel lblAnyadir;
 	private JTextField textApellidos;
 	private JTextField textNombre;

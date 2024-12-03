@@ -27,6 +27,7 @@ import main.TallerPicassoMainApp;
 import models.Cita;
 import models.Usuario;
 import java.util.List;
+import java.awt.FlowLayout;
 
 public class VentanaRegistro extends JDialog {
 
@@ -57,137 +58,148 @@ public class VentanaRegistro extends JDialog {
 	private JLabel lblNewLabel_2;
 	private JPasswordField passwordField;
 	private JPasswordField passwordFieldConfirm;
+	private JPanel panel_1;
+	private JPanel panel_2;
 
-	/**
-	 * Create the dialog.
-	 */
 	public VentanaRegistro(JFrame parent) {
 		super(parent, "Registro", true);
 		inicializarComponentes();		
 	}
 
 	private void inicializarComponentes() {
-		setResizable(false);
-		setSize(600, 600);
-		setTitle("Talleres Picasso");
-		setIconImage(
-				Toolkit.getDefaultToolkit().getImage(VentanaRegistro.class.getResource("/resources/cocheAzul.png")));
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE); // Cierra la ventana modal al hacer click en la "X"
-		setBounds(750, 300, 500, 500);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+	    setResizable(false);
+	    setSize(600, 600);
+	    setTitle("Talleres Picasso");
+	    setIconImage(
+	            Toolkit.getDefaultToolkit().getImage(VentanaRegistro.class.getResource("/resources/cocheAzul.png")));
+	    setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE); // Cierra la ventana modal al hacer click en la "X"
+	    setBounds(750, 300, 500, 500);
+	    contentPane = new JPanel();
+	    contentPane.setBackground(new Color(128, 170, 202));
+	    contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
+	    setContentPane(contentPane);
+	    contentPane.setLayout(new BorderLayout(0, 0));
 
-		banner = new JPanel();
-		banner.setBackground(new Color(0, 0, 128));
-		contentPane.add(banner, BorderLayout.NORTH);
+	    banner = new JPanel();
+	    banner.setBackground(new Color(0, 0, 128));
+	    contentPane.add(banner, BorderLayout.NORTH);
 
-		lblNewLabel_1 = new JLabel("Registro Cliente");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 32));
-		lblNewLabel_1.setForeground(new Color(255, 255, 255));
-		banner.add(lblNewLabel_1);
+	    lblNewLabel_1 = new JLabel("Registro Cliente");
+	    lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 32));
+	    lblNewLabel_1.setForeground(new Color(255, 255, 255));
+	    banner.add(lblNewLabel_1);
 
-		bottomPanel = new JPanel();
-		contentPane.add(bottomPanel, BorderLayout.SOUTH);
+	    bottomPanel = new JPanel();
+	    bottomPanel.setBackground(new Color(128, 170, 202));
+	    contentPane.add(bottomPanel, BorderLayout.SOUTH);
 
-		lblNewLabel = new JLabel("     ");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 54));
-		bottomPanel.add(lblNewLabel);
+	    lblNewLabel = new JLabel("     ");
+	    lblNewLabel.setBackground(new Color(128, 170, 202));
+	    lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 54));
+	    bottomPanel.add(lblNewLabel);
 
-		btnRegistrar = new JButton("Registrar");
-		btnRegistrar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				crearCliente();
-			}
-		});
-		btnRegistrar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		bottomPanel.add(btnRegistrar);
+	    btnRegistrar = new JButton("Registrar");
+	    btnRegistrar.addMouseListener(new MouseAdapter() {
+	        @Override
+	        public void mouseClicked(MouseEvent e) {
+	            crearCliente();
+	        }
+	    });
+	    btnRegistrar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+	    bottomPanel.add(btnRegistrar);
 
-		btnCancelar = new JButton("Cancelar");
-		btnCancelar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnCancelar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				dispose();
-			}
-		});
-		bottomPanel.add(btnCancelar);
+	    btnCancelar = new JButton("Cancelar");
+	    btnCancelar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+	    btnCancelar.addMouseListener(new MouseAdapter() {
+	        @Override
+	        public void mouseClicked(MouseEvent e) {
+	            dispose();
+	        }
+	    });
+	    bottomPanel.add(btnCancelar);
 
-		lblNewLabel_2 = new JLabel("     ");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 54));
-		bottomPanel.add(lblNewLabel_2);
+	    lblNewLabel_2 = new JLabel("     ");
+	    lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 54));
+	    bottomPanel.add(lblNewLabel_2);
 
-		centerPanel = new JPanel();
-		contentPane.add(centerPanel, BorderLayout.CENTER);
-		centerPanel.setLayout(new GridLayout(0, 2, 10, 10));
+	    panel_1 = new JPanel();
+	    contentPane.add(panel_1, BorderLayout.CENTER);
+	    panel_1.setLayout(new BorderLayout(0, 0));
 
-		lblNombre = new JLabel("Nombre");
-		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
-		centerPanel.add(lblNombre);
+	    panel_2 = new JPanel();
+	    panel_2.setBackground(new Color(128, 170, 202));
+	    panel_1.add(panel_2, BorderLayout.NORTH);
 
-		txtNombre = new JTextField();
-		txtNombre.setColumns(10);
-		centerPanel.add(txtNombre);
+	    centerPanel = new JPanel();
+	    panel_1.add(centerPanel, BorderLayout.CENTER); // Ajuste importante
+	    centerPanel.setLayout(new GridLayout(0, 2, 10, 10)); // Cambia filas dinámicas y columnas fijas
 
-		lblApellidos = new JLabel("Apellidos");
-		lblApellidos.setHorizontalAlignment(SwingConstants.CENTER);
-		centerPanel.add(lblApellidos);
+	    lblNombre = new JLabel("Nombre");
+	    lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
+	    centerPanel.add(lblNombre);
 
-		txtApellidos = new JTextField();
-		txtApellidos.setColumns(10);
-		centerPanel.add(txtApellidos);
+	    txtNombre = new JTextField();
+	    txtNombre.setColumns(10);
+	    centerPanel.add(txtNombre);
 
-		lblTelefono = new JLabel("Teléfono");
-		lblTelefono.setHorizontalAlignment(SwingConstants.CENTER);
-		centerPanel.add(lblTelefono);
+	    lblApellidos = new JLabel("Apellidos");
+	    lblApellidos.setHorizontalAlignment(SwingConstants.CENTER);
+	    centerPanel.add(lblApellidos);
 
-		txtTelefono = new JTextField();
-		txtTelefono.setColumns(10);
-		centerPanel.add(txtTelefono);
+	    txtApellidos = new JTextField();
+	    txtApellidos.setColumns(10);
+	    centerPanel.add(txtApellidos);
 
-		lblEmail = new JLabel("Email");
-		lblEmail.setHorizontalAlignment(SwingConstants.CENTER);
-		centerPanel.add(lblEmail);
+	    lblTelefono = new JLabel("Teléfono");
+	    lblTelefono.setHorizontalAlignment(SwingConstants.CENTER);
+	    centerPanel.add(lblTelefono);
 
-		txtEmail = new JTextField();
-		txtEmail.setColumns(10);
-		centerPanel.add(txtEmail);
+	    txtTelefono = new JTextField();
+	    txtTelefono.setColumns(10);
+	    centerPanel.add(txtTelefono);
 
-		lblPass = new JLabel("Contraseña");
-		lblPass.setHorizontalAlignment(SwingConstants.CENTER);
-		centerPanel.add(lblPass);
+	    lblEmail = new JLabel("Email");
+	    lblEmail.setHorizontalAlignment(SwingConstants.CENTER);
+	    centerPanel.add(lblEmail);
 
-		passwordField = new JPasswordField();
-		centerPanel.add(passwordField);
+	    txtEmail = new JTextField();
+	    txtEmail.setColumns(10);
+	    centerPanel.add(txtEmail);
 
-		lblPassConfirmed = new JLabel("Confirma Contrasela");
-		lblPassConfirmed.setHorizontalAlignment(SwingConstants.CENTER);
-		centerPanel.add(lblPassConfirmed);
+	    lblPass = new JLabel("Contraseña");
+	    lblPass.setHorizontalAlignment(SwingConstants.CENTER);
+	    centerPanel.add(lblPass);
 
-		passwordFieldConfirm = new JPasswordField();
-		centerPanel.add(passwordFieldConfirm);
+	    passwordField = new JPasswordField();
+	    centerPanel.add(passwordField);
 
-		lblMetodoContacto = new JLabel("Metodo de Contacto");
-		lblMetodoContacto.setHorizontalAlignment(SwingConstants.CENTER);
-		centerPanel.add(lblMetodoContacto);
+	    lblPassConfirmed = new JLabel("Confirma Contraseña");
+	    lblPassConfirmed.setHorizontalAlignment(SwingConstants.CENTER);
+	    centerPanel.add(lblPassConfirmed);
 
-		panel = new JPanel();
-		centerPanel.add(panel);
-		panel.setLayout(new GridLayout(0, 1, 0, 0));
+	    passwordFieldConfirm = new JPasswordField();
+	    centerPanel.add(passwordFieldConfirm);
 
-		rdbTelefono = new JRadioButton("Teléfono");
-		radioButtonGroup.add(rdbTelefono);
-		rdbTelefono.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(rdbTelefono);
+	    lblMetodoContacto = new JLabel("Método de Contacto");
+	    lblMetodoContacto.setHorizontalAlignment(SwingConstants.CENTER);
+	    centerPanel.add(lblMetodoContacto);
 
-		rdbEmail = new JRadioButton("Email");
-		radioButtonGroup.add(rdbEmail);
-		rdbEmail.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(rdbEmail);
+	    panel = new JPanel();
+	    centerPanel.add(panel);
+	    panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+
+	    rdbTelefono = new JRadioButton("Teléfono");
+	    radioButtonGroup.add(rdbTelefono);
+	    rdbTelefono.setHorizontalAlignment(SwingConstants.CENTER);
+	    panel.add(rdbTelefono);
+
+	    rdbEmail = new JRadioButton("Email");
+	    radioButtonGroup.add(rdbEmail);
+	    rdbEmail.setHorizontalAlignment(SwingConstants.CENTER);
+	    panel.add(rdbEmail);
 	}
+
 
 	protected void crearCliente() {
 	    String nombre = txtNombre.getText();

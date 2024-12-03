@@ -4,15 +4,10 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.GridLayout;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.border.SoftBevelBorder;
@@ -27,11 +22,8 @@ public class CSVSwingApp extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private String archivoCSV = "archivos/datos.csv";
-	private String archivoDat = "archivos/datos.dat";
+	// private String archivoDat = "archivos/datos.dat";
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -45,9 +37,6 @@ public class CSVSwingApp extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public CSVSwingApp() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 480);

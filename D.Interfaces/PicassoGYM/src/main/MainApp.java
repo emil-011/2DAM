@@ -4,17 +4,13 @@ import gui.VentanaCliente;
 import gui.VentanaAdministracion;
 import gui.VentanaLogin;
 import utils.Usuario;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 
 
@@ -29,7 +25,6 @@ public class MainApp {
 			try {
 				UIManager.setLookAndFeel(new FlatMacDarkLaf());
 			} catch (UnsupportedLookAndFeelException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			// User is logged in, open the corresponding window based on user profile

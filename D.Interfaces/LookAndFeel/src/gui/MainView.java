@@ -2,7 +2,6 @@ package gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -14,18 +13,14 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
-
-import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
-import com.formdev.flatlaf.themes.FlatMacLightLaf;
 
 public class MainView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JComboBox cbLookAndFeel;
+	private JComboBox<String> cbLookAndFeel;
 	private JTextField textField;
 
 	/**
@@ -35,7 +30,6 @@ public class MainView extends JFrame {
 		try {
 			UIManager.setLookAndFeel(new FlatDarkLaf());
 		} catch (UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -50,7 +44,6 @@ public class MainView extends JFrame {
 		try {
 			UIManager.setLookAndFeel(new FlatMacDarkLaf());
 		} catch (UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		SwingUtilities.updateComponentTreeUI(this);
@@ -76,7 +69,7 @@ public class MainView extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		cbLookAndFeel = new JComboBox();
+		cbLookAndFeel = new JComboBox<String>();
 		cbLookAndFeel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cbLookAndFeelChange(e);
@@ -109,16 +102,12 @@ public class MainView extends JFrame {
 			UIManager.setLookAndFeel(lfInfo.getClassName());
 			SwingUtilities.updateComponentTreeUI(this);
 		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (InstantiationException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (IllegalAccessException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (UnsupportedLookAndFeelException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 

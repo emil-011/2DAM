@@ -3,9 +3,8 @@ package dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import models.City;
-import models.Country;
 import models.CountryLanguage;
+
 
 public class CountryLanguageDaoImpl implements CountryLanguageDao {
 

@@ -3,7 +3,6 @@ package dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import models.City;
 import models.Country;
 
 public class CountryDaoImpl implements CountryDao {
@@ -24,31 +23,26 @@ public class CountryDaoImpl implements CountryDao {
 
 	@Override
 	public int add(Country country) throws SQLException {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public Country getById(int id) throws SQLException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<Country> getAll() throws SQLException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public int update(Country city) throws SQLException {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public void delete(int id) throws SQLException {
-		// TODO Auto-generated method stub
 
 	}
 

@@ -23,6 +23,7 @@ public class MainApp {
 
 	}
 	
+	@SuppressWarnings("unused")
 	private static void insertSimple() {
 		Localidad localidad = new Localidad(31, "Rincon");
 		RestauranteHibernateUtil.insertarLocalidad(localidad);
@@ -37,6 +38,7 @@ public class MainApp {
 		RestauranteHibernateUtil.closeSession();
 	}
 
+	@SuppressWarnings("unused")
 	private static void selectSimple() {
 		String hql = "SELECT l.codLocalidad, l.nombre FROM Localidad l";
 		Query<Object[]> query = RestauranteHibernateUtil.getSession().createQuery(hql, Object[].class);

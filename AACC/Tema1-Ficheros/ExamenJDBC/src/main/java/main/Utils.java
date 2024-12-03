@@ -196,6 +196,7 @@ public class Utils {
 	public static void cargarPeliculasBinario(String archivo) {
 		verificarExtension(archivo , ".dat");
 		try (ObjectInputStream lector = new ObjectInputStream(new FileInputStream(archivo))) {
+			@SuppressWarnings("unused")
 			Object objeto;
 			while ((objeto = lector.readObject()) != null) {
 				

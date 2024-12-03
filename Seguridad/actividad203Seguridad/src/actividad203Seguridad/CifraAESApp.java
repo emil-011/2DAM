@@ -29,12 +29,12 @@ public class CifraAESApp {
 	public CifraAESApp(String instanciaFabricaCLave, byte[] salt, int iterations, int keySize, String mensaje,
 			char[] password) {
 		super();
-		this.instanciaFabricaCLave = instanciaFabricaCLave;
+		CifraAESApp.instanciaFabricaCLave = instanciaFabricaCLave;
 		CifraAESApp.salt = salt;
 		CifraAESApp.iterations = iterations;
 		CifraAESApp.keySize = keySize;
 		this.mensaje = mensaje;
-		this.password = password;
+		this.setPassword(password);
 	}
 
 	public String getInstanciaFabricaCLave() {
@@ -45,7 +45,7 @@ public class CifraAESApp {
 		return MENSAJE_DEFAULT;
 	}
 
-	public static char[] getPasswordDefault() {
+	public char[] getPasswordDefault() {
 		return PASSWORD_DEFAULT;
 	}
 
@@ -97,5 +97,13 @@ public class CifraAESApp {
 		CifraAESApp cifraAES = new CifraAESApp(instanciaFabricaCLave, salt, iterations, keySize, mensaje, password);
 		
 		System.out.println(cifraAES.cifrarMensaje());
+	}
+
+	public char[] getPassword() {
+		return password;
+	}
+
+	public void setPassword(char[] password) {
+		this.password = password;
 	}
 }

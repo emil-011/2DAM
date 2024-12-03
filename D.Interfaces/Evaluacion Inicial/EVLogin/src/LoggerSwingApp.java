@@ -3,7 +3,6 @@ import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
@@ -47,7 +46,8 @@ public class LoggerSwingApp extends JFrame {
     /**
      * Create the frame.
      */
-    public LoggerSwingApp() {
+    @SuppressWarnings("serial")
+	public LoggerSwingApp() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(800, 400, 362, 299);
         setTitle("Login");
