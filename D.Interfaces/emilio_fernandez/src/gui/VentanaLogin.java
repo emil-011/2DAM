@@ -1,9 +1,13 @@
 package gui;
 
+import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import utils.Usuario;
+
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -11,7 +15,10 @@ import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.GridLayout;
 import javax.swing.JTextField;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
@@ -38,6 +45,9 @@ public class VentanaLogin extends JFrame {
 	private JLabel lblLoginButton;
 	private static final String USUARIOS_REGISTRADOS = "usuarios_registrados.csv";
 
+	/**
+	 * Create the frame.
+	 */
 	public VentanaLogin() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaLogin.class.getResource("/resources/Logo.png")));
 		setTitle("Login");

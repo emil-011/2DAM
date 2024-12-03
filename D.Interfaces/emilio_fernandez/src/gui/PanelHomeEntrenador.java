@@ -2,11 +2,19 @@ package gui;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
+import javax.swing.JTextField;
+import javax.swing.JRadioButton;
+import javax.swing.JComboBox;
+import com.toedter.calendar.JYearChooser;
+
 import utils.Usuario;
+
+import java.awt.Rectangle;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;

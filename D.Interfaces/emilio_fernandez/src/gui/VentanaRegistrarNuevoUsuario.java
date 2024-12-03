@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -13,6 +14,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,10 +25,13 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import com.toedter.calendar.JDateChooser;
+
 import utils.Usuario;
+
 import javax.swing.JRadioButton;
 import java.awt.GridLayout;
 import java.awt.Cursor;
+import java.awt.Dialog.ModalExclusionType;
 import java.awt.Toolkit;
 
 public class VentanaRegistrarNuevoUsuario extends JFrame {

@@ -61,14 +61,12 @@ public class VentanaLogin extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(750, 300, 500, 500);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(133, 200, 250));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 
 		banner = new JPanel();
-		banner.setBackground(new Color(133, 200, 250));
 		contentPane.add(banner, BorderLayout.NORTH);
 
 		lblTalleresPicasso = new JLabel("Talleres Picasso");
@@ -81,7 +79,6 @@ public class VentanaLogin extends JFrame {
 		banner.add(lblTalleresPicasso);
 
 		bottomPanel = new JPanel();
-		bottomPanel.setBackground(new Color(133, 200, 250));
 		contentPane.add(bottomPanel, BorderLayout.SOUTH);
 
 		lblNewLabel = new JLabel("     ");
@@ -89,13 +86,11 @@ public class VentanaLogin extends JFrame {
 		bottomPanel.add(lblNewLabel);
 
 		centerPanel = new JPanel();
-		centerPanel.setBackground(new Color(133, 200, 250));
 		contentPane.add(centerPanel, BorderLayout.CENTER);
 		centerPanel.setLayout(new GridLayout(3, 2, 10, 10)); // Espaciado entre filas y columnas
 
 		// Panel envolvente para lblUsuario
 		userLabelPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		userLabelPanel.setBackground(new Color(133, 200, 250));
 		lblUsuario = new JLabel("Usuario");
 		lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		userLabelPanel.add(lblUsuario);
@@ -103,16 +98,14 @@ public class VentanaLogin extends JFrame {
 
 		// Panel envolvente para txtUsername
 		userTextFieldPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		userTextFieldPanel.setBackground(new Color(133, 200, 250));
 		txtUsername = new JTextField();
-		txtUsername.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		txtUsername.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		txtUsername.setPreferredSize(new Dimension(200, 30));
 		userTextFieldPanel.add(txtUsername);
 		centerPanel.add(userTextFieldPanel);
 
 		// Panel envolvente para lblPassword
 		passwordLabelPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		passwordLabelPanel.setBackground(new Color(133, 200, 250));
 		lblPassword = new JLabel("Contraseña");
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		passwordLabelPanel.add(lblPassword);
@@ -120,16 +113,14 @@ public class VentanaLogin extends JFrame {
 
 		// Panel envolvente para passwordField
 		passwordFieldPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		passwordFieldPanel.setBackground(new Color(133, 200, 250));
 		passwordField = new JPasswordField();
-		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		passwordField.setPreferredSize(new Dimension(200, 30));
 		passwordFieldPanel.add(passwordField);
 		centerPanel.add(passwordFieldPanel);
 
 		// Panel envolvente para lblnoTienesCuenta
 		noAccountLabelPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		noAccountLabelPanel.setBackground(new Color(133, 200, 250));
 		lblnoTienesCuenta = new JLabel("¿No tienes cuenta?");
 		lblnoTienesCuenta.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblnoTienesCuenta.addMouseListener(new MouseAdapter() {
@@ -145,7 +136,6 @@ public class VentanaLogin extends JFrame {
 
 		// Panel envolvente para btnLogIn
 		loginButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		loginButtonPanel.setBackground(new Color(133, 200, 250));
 		btnLogIn = new JButton("Inicia Sesión");
 		btnLogIn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnLogIn.addMouseListener(new MouseAdapter() {

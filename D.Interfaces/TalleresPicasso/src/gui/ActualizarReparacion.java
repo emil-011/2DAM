@@ -54,6 +54,9 @@ public class ActualizarReparacion extends JDialog {
 	private JLabel lblObservaciones;
 	private JTextField textFieldObservaciones;
 
+	/**
+	 * Create the dialog.
+	 */
 	public ActualizarReparacion(JFrame parent, Usuario usuario) {
 		super(parent, "Registro", true);
 		inicializarComponentes(usuario);
