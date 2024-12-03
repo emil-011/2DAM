@@ -1,0 +1,228 @@
+package gui;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+import main.MainApp;
+import modelos.Serie;
+import modelos.Temporada;
+import modelos.Usuario;
+
+import java.awt.Font;
+import java.awt.Cursor;
+import com.toedter.calendar.JDateChooser;
+
+public class NuevaSerie extends JDialog {
+
+	private static final long serialVersionUID = 1L;
+	private final JPanel contentPanel = new JPanel();
+	private JTextField txtNombre;
+	private JTextField txtPlataforma;
+	private JPanel centerPanel;
+	private JPanel panel_2;
+	private JPanel panel_3;
+	private JLabel lblNewLabel_2;
+	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel_4;
+	private JLabel lblNewLabel_5;
+	private JLabel lblNewLabel_6;
+	private JLabel lblNewLabel_3;
+	private JLabel lblNewLabel_7;
+	private JDateChooser dateChooserInicio;
+	private JDateChooser dateChooserFin;
+	private JTextField txtNCapitulos;
+
+	public NuevaSerie() {
+		inicializarComponentes();
+	}
+
+	private void inicializarComponentes() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(NuevaTemporada.class.getResource("/resources/logo.png")));
+		this.setModal(true);
+		setBounds(100, 100, 528, 682);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(0, 0, 0));
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(new BorderLayout(0, 0));
+
+		panel_2 = new JPanel();
+		panel_2.setBackground(new Color(128, 128, 128));
+		contentPanel.add(panel_2, BorderLayout.EAST);
+
+		panel_3 = new JPanel();
+		panel_3.setBackground(new Color(0, 0, 0));
+		contentPanel.add(panel_3, BorderLayout.NORTH);
+
+		JLabel lblNewLabel = new JLabel("Nueva Serie");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 42));
+		lblNewLabel.setForeground(new Color(255, 0, 0));
+		panel_3.add(lblNewLabel);
+
+		centerPanel = new JPanel();
+		centerPanel.setBackground(new Color(128, 128, 128));
+		contentPanel.add(centerPanel, BorderLayout.CENTER);
+		GridLayout gl_centerPanel = new GridLayout();
+		gl_centerPanel.setHgap(5);
+		gl_centerPanel.setVgap(50);
+		gl_centerPanel.setColumns(2);
+		gl_centerPanel.setRows(7);
+		centerPanel.setLayout(gl_centerPanel);
+
+		lblNewLabel_1 = new JLabel("Nombre");
+		lblNewLabel_1.setFont(new Font("Verdana", Font.BOLD, 16));
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		centerPanel.add(lblNewLabel_1);
+
+		txtNombre = new JTextField();
+		txtNombre.setFont(new Font("Verdana", Font.PLAIN, 14));
+		centerPanel.add(txtNombre);
+		txtNombre.setColumns(10);
+
+		lblNewLabel_2 = new JLabel("Plataforma");
+		lblNewLabel_2.setFont(new Font("Verdana", Font.BOLD, 16));
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		centerPanel.add(lblNewLabel_2);
+
+		txtPlataforma = new JTextField();
+		txtPlataforma.setFont(new Font("Verdana", Font.PLAIN, 14));
+		centerPanel.add(txtPlataforma);
+		txtPlataforma.setColumns(10);
+
+		lblNewLabel_4 = new JLabel("Temporada");
+		lblNewLabel_4.setFont(new Font("Verdana", Font.BOLD, 16));
+		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
+		centerPanel.add(lblNewLabel_4);
+
+		lblNewLabel_7 = new JLabel("1");
+		lblNewLabel_7.setForeground(new Color(255, 255, 255));
+		lblNewLabel_7.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_7.setFont(new Font("Verdana", Font.BOLD, 16));
+		centerPanel.add(lblNewLabel_7);
+
+		lblNewLabel_5 = new JLabel("Fecha de Inicio");
+		lblNewLabel_5.setFont(new Font("Verdana", Font.BOLD, 16));
+		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
+		centerPanel.add(lblNewLabel_5);
+
+		dateChooserInicio = new JDateChooser();
+		centerPanel.add(dateChooserInicio);
+
+		lblNewLabel_6 = new JLabel("Fecha de Fin");
+		lblNewLabel_6.setFont(new Font("Verdana", Font.BOLD, 16));
+		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
+		centerPanel.add(lblNewLabel_6);
+
+		dateChooserFin = new JDateChooser();
+		centerPanel.add(dateChooserFin);
+
+		lblNewLabel_3 = new JLabel("Numero de Capitulos");
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_3.setFont(new Font("Verdana", Font.BOLD, 16));
+		centerPanel.add(lblNewLabel_3);
+
+		txtNCapitulos = new JTextField();
+		txtNCapitulos.setFont(new Font("Verdana", Font.PLAIN, 14));
+		txtNCapitulos.setColumns(10);
+		centerPanel.add(txtNCapitulos);
+
+		JPanel buttonPane = new JPanel();
+		buttonPane.setBackground(new Color(0, 0, 0));
+		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		getContentPane().add(buttonPane, BorderLayout.SOUTH);
+
+		JButton btnRegistrar = new JButton("Registrar");
+		btnRegistrar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRegistrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				crearSerie();
+			}
+		});
+		btnRegistrar.setActionCommand("OK");
+		buttonPane.add(btnRegistrar);
+		getRootPane().setDefaultButton(btnRegistrar);
+
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnCancelar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				dispose();
+			}
+		});
+		btnCancelar.setActionCommand("Cancel");
+		buttonPane.add(btnCancelar);
+
+	}
+
+	protected void crearSerie() {
+		String nombre = txtNombre.getText();
+		String plataforma = txtPlataforma.getText();
+		Date fechaInicio = dateChooserInicio.getDate();
+		Date fechaFin = dateChooserFin.getDate();
+		int nCapitulos = Integer.parseInt(txtNCapitulos.getText());
+		boolean encontrado = false;
+
+		// Verificamos que estén todos los campos rellenos
+		if (nombre.isBlank() || plataforma.isBlank() || nCapitulos <= 0 || dateChooserInicio == null
+				|| dateChooserFin == null) {
+			JOptionPane.showMessageDialog(null, "Debes completar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+			return; // Detenemos la ejecución del método
+		}
+
+		// Verificamos que las contraseñas sean iguales
+		if (dateChooserInicio == dateChooserFin) {
+			JOptionPane.showMessageDialog(null, "Las fechas no pueden ser iguales", "ERROR", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		// Verificamos si el usuario ya existe
+		for (Serie se : MainApp.lstSeries) {
+			if (se.getNombre().equals(nombre)) {
+				encontrado = true;
+				break;
+			}
+		}
+
+		if (encontrado) {
+			JOptionPane.showMessageDialog(null, "La serie a crear ya existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+			return; // Detenemos la ejecución del método
+		}
+
+		LocalDate fechaInicial = fechaInicio.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		LocalDate fechaFinal = fechaFin.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		
+		Temporada temp = new Temporada(1, fechaInicial, fechaFinal, nCapitulos);
+		List<Temporada> listaTemporadas = new ArrayList<>();
+		listaTemporadas.add(temp);
+		// Si todo está correcto, creamos la serie
+		Serie newSerie = new Serie(nombre, plataforma, listaTemporadas);
+		MainApp.lstSeries.add(newSerie);
+		JOptionPane.showMessageDialog(null, "La serie " + nombre + " ha sido creado con éxito");
+		dispose();
+	}
+
+}
