@@ -12,6 +12,8 @@ import models.Titular;
 import utils.RestauranteHibernateUtil;
 
 public class MainApp {
+	
+	private static Query<Object[]> query = null;
 
 	public static void main(String[] args) {
 		// Insertamos localidad
@@ -41,7 +43,7 @@ public class MainApp {
 	@SuppressWarnings("unused")
 	private static void selectSimple() {
 		String hql = "SELECT l.codLocalidad, l.nombre FROM Localidad l";
-		Query<Object[]> query = RestauranteHibernateUtil.getSession().createQuery(hql, Object[].class);
+		query = RestauranteHibernateUtil.getSession().createQuery(hql, Object[].class);
 
 		// Ejecuta la consulta
 		List<Object[]> localidades = query.list();
@@ -61,7 +63,7 @@ public class MainApp {
 	                 "FROM Restaurante r " +
 	                 "INNER JOIN r.localidad l ";
 	                
-	    Query<Object[]> query = RestauranteHibernateUtil.getSession().createQuery(hql, Object[].class);
+	    query = RestauranteHibernateUtil.getSession().createQuery(hql, Object[].class);
 
 	    // Ejecuta la consulta
 	    List<Object[]> results = query.list();
@@ -80,7 +82,7 @@ public class MainApp {
 	                 "FROM Restaurante r " +
 	                 "INNER JOIN r.localidad l " +
 	                 "GROUP BY l.nombre";
-	    Query<Object[]> query = RestauranteHibernateUtil.getSession().createQuery(hql, Object[].class);
+	    query = RestauranteHibernateUtil.getSession().createQuery(hql, Object[].class);
 
 	    // Ejecuta la consulta
 	    List<Object[]> results = query.list();
