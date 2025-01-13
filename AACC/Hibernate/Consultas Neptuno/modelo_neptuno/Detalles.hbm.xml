@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 20 ene. 2021 12:08:17 by Hibernate Tools 5.4.21.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="bd_neptuno" dynamic-insert="false" dynamic-update="false" mutable="true" name="modelo_neptuno.Detalles" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="detalles">
+        <composite-id class="modelo_neptuno.DetallesId" mapped="false" name="id" unsaved-value="undefined">
+            <key-property name="pedidoId" type="int">
+                <column name="pedido_id"/>
+            </key-property>
+            <key-property name="productoId" type="int">
+                <column name="producto_id"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="modelo_neptuno.Pedidos" embed-xml="true" fetch="select" insert="false" name="pedidos" not-found="exception" optimistic-lock="true" unique="false" update="false">
+            <column name="pedido_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="modelo_neptuno.Productos" embed-xml="true" fetch="select" insert="false" name="productos" not-found="exception" optimistic-lock="true" unique="false" update="false">
+            <column name="producto_id" not-null="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="precioUnidad" optimistic-lock="true" type="big_decimal" unique="false">
+            <column name="precio_unidad" scale="4"/>
+        </property>
+        <property generated="never" lazy="false" name="cantidad" optimistic-lock="true" type="java.lang.Short" unique="false">
+            <column name="cantidad"/>
+        </property>
+        <property generated="never" lazy="false" name="descuento" optimistic-lock="true" type="java.lang.Double" unique="false">
+            <column name="descuento" precision="7"/>
+        </property>
+    </class>
+</hibernate-mapping>

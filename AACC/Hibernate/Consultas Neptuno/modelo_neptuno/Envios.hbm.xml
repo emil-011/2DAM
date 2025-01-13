@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 20 ene. 2021 12:08:17 by Hibernate Tools 5.4.21.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="bd_neptuno" dynamic-insert="false" dynamic-update="false" mutable="true" name="modelo_neptuno.Envios" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="envios">
+        <id name="id" type="java.lang.Integer">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+        <property generated="never" lazy="false" name="empresa" optimistic-lock="true" type="string" unique="false">
+            <column length="40" name="empresa" not-null="true" unique="true"/>
+        </property>
+        <property generated="never" lazy="false" name="telefono" optimistic-lock="true" type="string" unique="false">
+            <column length="24" name="telefono"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="pedidoses" optimistic-lock="true" sort="unsorted" table="pedidos">
+            <key on-delete="noaction">
+                <column name="envio_id"/>
+            </key>
+            <one-to-many class="modelo_neptuno.Pedidos" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

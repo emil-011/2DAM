@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 20 ene. 2021 12:08:17 by Hibernate Tools 5.4.21.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="bd_neptuno" dynamic-insert="false" dynamic-update="false" mutable="true" name="modelo_neptuno.Importes" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="importes">
+        <comment>VIEW</comment>
+        <composite-id class="modelo_neptuno.ImportesId" mapped="false" name="id" unsaved-value="undefined">
+            <key-property name="pedidoId" type="int">
+                <column name="pedido_id"/>
+            </key-property>
+            <key-property name="productoId" type="int">
+                <column name="producto_id"/>
+            </key-property>
+            <key-property name="precioUnidad" type="big_decimal">
+                <column name="precio_unidad" scale="4"/>
+            </key-property>
+            <key-property name="cantidad" type="java.lang.Short">
+                <column name="cantidad"/>
+            </key-property>
+            <key-property name="descuento" type="java.lang.Double">
+                <column name="descuento" precision="7"/>
+            </key-property>
+            <key-property name="importe" type="java.lang.Double">
+                <column name="importe" precision="22" scale="4"/>
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 20 ene. 2021 12:08:17 by Hibernate Tools 5.4.21.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="bd_neptuno" dynamic-insert="false" dynamic-update="false" mutable="true" name="modelo_neptuno.Empleados" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="empleados">
+        <id name="id" type="java.lang.Integer">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="modelo_neptuno.Empleados" embed-xml="true" fetch="select" insert="true" name="empleados" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="jefe_id"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="apellidos" optimistic-lock="true" type="string" unique="false">
+            <column length="20" name="apellidos" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="nombre" optimistic-lock="true" type="string" unique="false">
+            <column length="10" name="nombre" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="cargo" optimistic-lock="true" type="string" unique="false">
+            <column length="30" name="cargo"/>
+        </property>
+        <property generated="never" lazy="false" name="tratamiento" optimistic-lock="true" type="string" unique="false">
+            <column length="25" name="tratamiento"/>
+        </property>
+        <property generated="never" lazy="false" name="fechaNacimiento" optimistic-lock="true" type="date" unique="false">
+            <column length="10" name="fecha_nacimiento"/>
+        </property>
+        <property generated="never" lazy="false" name="fechaContratacion" optimistic-lock="true" type="date" unique="false">
+            <column length="10" name="fecha_contratacion"/>
+        </property>
+        <property generated="never" lazy="false" name="direccion" optimistic-lock="true" type="string" unique="false">
+            <column length="60" name="direccion"/>
+        </property>
+        <property generated="never" lazy="false" name="ciudad" optimistic-lock="true" type="string" unique="false">
+            <column length="15" name="ciudad"/>
+        </property>
+        <property generated="never" lazy="false" name="region" optimistic-lock="true" type="string" unique="false">
+            <column length="15" name="region"/>
+        </property>
+        <property generated="never" lazy="false" name="cp" optimistic-lock="true" type="string" unique="false">
+            <column length="10" name="cp"/>
+        </property>
+        <property generated="never" lazy="false" name="pais" optimistic-lock="true" type="string" unique="false">
+            <column length="15" name="pais"/>
+        </property>
+        <property generated="never" lazy="false" name="telefonoDomicilio" optimistic-lock="true" type="string" unique="false">
+            <column length="24" name="telefono_domicilio"/>
+        </property>
+        <property generated="never" lazy="false" name="extension" optimistic-lock="true" type="string" unique="false">
+            <column length="4" name="extension"/>
+        </property>
+        <property generated="never" lazy="false" name="notas" optimistic-lock="true" type="string" unique="false">
+            <column length="65535" name="notas"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="pedidoses" optimistic-lock="true" sort="unsorted" table="pedidos">
+            <key on-delete="noaction">
+                <column name="empleado_id"/>
+            </key>
+            <one-to-many class="modelo_neptuno.Pedidos" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="empleadoses" optimistic-lock="true" sort="unsorted" table="empleados">
+            <key on-delete="noaction">
+                <column name="jefe_id"/>
+            </key>
+            <one-to-many class="modelo_neptuno.Empleados" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>
