@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 20 ene. 2021 12:08:17 by Hibernate Tools 5.4.21.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="bd_neptuno" dynamic-insert="false" dynamic-update="false" mutable="true" name="modelo_neptuno.Pedidos" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="pedidos">
+        <id name="id" type="java.lang.Integer">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="modelo_neptuno.Clientes" embed-xml="true" fetch="select" insert="true" name="clientes" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="cliente_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="modelo_neptuno.Empleados" embed-xml="true" fetch="select" insert="true" name="empleados" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="empleado_id"/>
+        </many-to-one>
+        <many-to-one class="modelo_neptuno.Envios" embed-xml="true" fetch="select" insert="true" name="envios" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="envio_id"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="fechaPedido" optimistic-lock="true" type="date" unique="false">
+            <column length="10" name="fecha_pedido"/>
+        </property>
+        <property generated="never" lazy="false" name="fechaEntrega" optimistic-lock="true" type="date" unique="false">
+            <column length="10" name="fecha_entrega"/>
+        </property>
+        <property generated="never" lazy="false" name="fechaEnvio" optimistic-lock="true" type="date" unique="false">
+            <column length="10" name="fecha_envio"/>
+        </property>
+        <property generated="never" lazy="false" name="cargo" optimistic-lock="true" type="big_decimal" unique="false">
+            <column name="cargo" scale="4"/>
+        </property>
+        <property generated="never" lazy="false" name="destinatario" optimistic-lock="true" type="string" unique="false">
+            <column length="40" name="destinatario"/>
+        </property>
+        <property generated="never" lazy="false" name="direccionDestinatario" optimistic-lock="true" type="string" unique="false">
+            <column length="60" name="direccion_destinatario"/>
+        </property>
+        <property generated="never" lazy="false" name="ciudadDestinatario" optimistic-lock="true" type="string" unique="false">
+            <column length="15" name="ciudad_destinatario"/>
+        </property>
+        <property generated="never" lazy="false" name="regionDestinatario" optimistic-lock="true" type="string" unique="false">
+            <column length="15" name="region_destinatario"/>
+        </property>
+        <property generated="never" lazy="false" name="cpDestinatario" optimistic-lock="true" type="string" unique="false">
+            <column length="10" name="cp_destinatario"/>
+        </property>
+        <property generated="never" lazy="false" name="paisDestinatario" optimistic-lock="true" type="string" unique="false">
+            <column length="15" name="pais_destinatario"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="detalleses" optimistic-lock="true" sort="unsorted" table="detalles">
+            <key on-delete="noaction">
+                <column name="pedido_id" not-null="true"/>
+            </key>
+            <one-to-many class="modelo_neptuno.Detalles" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

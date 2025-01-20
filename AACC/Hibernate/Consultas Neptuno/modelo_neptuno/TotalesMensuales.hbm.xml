@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 20 ene. 2021 12:08:17 by Hibernate Tools 5.4.21.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="bd_neptuno" dynamic-insert="false" dynamic-update="false" mutable="true" name="modelo_neptuno.TotalesMensuales" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="totales_mensuales">
+        <comment>VIEW</comment>
+        <composite-id class="modelo_neptuno.TotalesMensualesId" mapped="false" name="id" unsaved-value="undefined">
+            <key-property name="año" type="java.lang.Integer">
+                <column name="año"/>
+            </key-property>
+            <key-property name="mes" type="java.lang.Integer">
+                <column name="mes"/>
+            </key-property>
+            <key-property name="fecha" type="date">
+                <column length="10" name="fecha"/>
+            </key-property>
+            <key-property name="cargo" type="big_integer">
+                <column name="cargo" precision="38" scale="0"/>
+            </key-property>
+            <key-property name="importe" type="java.lang.Double">
+                <column name="importe" precision="22" scale="0"/>
+            </key-property>
+            <key-property name="total" type="java.lang.Double">
+                <column name="total" precision="22" scale="0"/>
+            </key-property>
+            <key-property name="numPedidos" type="long">
+                <column name="num_pedidos"/>
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>
