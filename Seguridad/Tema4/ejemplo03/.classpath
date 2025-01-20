@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Alumnado2DAM/Desktop/2DAM/Seguridad/Tema4/ejemplo03/sqlite-jdbc-3.40.0.0.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Alumnado2DAM/Desktop/2DAM/Seguridad/Tema4/ejemplo03/framework.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
