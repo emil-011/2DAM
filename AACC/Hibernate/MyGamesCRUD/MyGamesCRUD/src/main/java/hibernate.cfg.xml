@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">
+			com.mysql.cj.jdbc.Driver</property>
+		<property name="hibernate.connection.password">1234</property>
+		<property name="hibernate.connection.url">
+			jdbc:mysql://localhost:3306/MyGames</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.default_schema">world</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+
+        <mapping class="models.Usuario"/>
+        <mapping class="models.Plataforma"/>
+        <mapping class="models.GrupoPlataformas"/>
+        <mapping class="models.Juego"/>
+        <mapping class="models.Genero"/>
+        <mapping class="models.Desarollador"/>
+        <mapping class="models.GenerosFavoritos"/>
+        <mapping class="models.Biblioteca"/>
+        <mapping class="models.Wishlist"/>
+        <mapping class="models.UsuarioJuego"/>
+        <mapping class="models.UsuarioGeneroFavorito"/>
+
+
+
+	</session-factory>
+</hibernate-configuration>
