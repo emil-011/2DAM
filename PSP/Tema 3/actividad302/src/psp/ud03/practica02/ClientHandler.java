@@ -34,6 +34,7 @@ public class ClientHandler implements Runnable {
 				Files.copy(path, out);
 			} else {
 				// Enviamos respuesta KO
+				// si el archivo no existe o no se encuentra
 				out.write("KO\r\n".getBytes());
 				out.flush();
 			}
