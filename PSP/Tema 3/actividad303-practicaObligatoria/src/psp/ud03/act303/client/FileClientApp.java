@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class FileClientApp {
 
 	// Valores por defecto para el host y el puerto
-	private static final String DEFAULT_HOST = "localhost";
+	private static final String DEFAULT_HOST = "192.168.1.234";
 	private static final int DEFAULT_PORT = 2121;
 	private static final String OK = "OK";
 	private static final String KO = "KO";
@@ -15,9 +15,9 @@ public class FileClientApp {
 	private int serverPort;
 
 	public static void main(String[] args) {
+		sc = new Scanner(System.in);
 		FileClientApp app = new FileClientApp();
 		app.run(args);
-		sc = new Scanner(System.in);
 	}
 
 	private void run(String[] args) {

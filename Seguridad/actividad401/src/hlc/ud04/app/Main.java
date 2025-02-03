@@ -1,4 +1,4 @@
-package hlc.ud04.practica01.app;
+package hlc.ud04.app;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
