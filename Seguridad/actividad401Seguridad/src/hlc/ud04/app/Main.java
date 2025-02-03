@@ -28,7 +28,8 @@ public class Main {
 		    // Usamos nuestro sistema de seguridad
 		    SistemaSeguridad sistemaSeguridad = new SistemaSeguridadTemporal(new AutenticadorTemporal());
 		    
-		    // Creamos interfaz de usuario de tipo consola y le pasamos el sistema de seguridad
+		    // Creamos interfaz de usuario
+		    // Da error
 		    Interfaz interfaz = new InterfazConsola(clientes, sistemaSeguridad);
 		    interfaz.run();
         } catch (SQLException e) {

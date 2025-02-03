@@ -9,10 +9,6 @@ import hlc.ud04.appsec.seguridad.autenticacion.RespuestaDesafio;
 public class RespuestaDesafioTemporal implements RespuestaDesafio {
 	private String pin;
 	
-	/**
-	 * Constructor principal, guardamos el pin que ingresó el usuario
-	 * @param pin
-	 */
 	public RespuestaDesafioTemporal(String pin) {
 		this.pin = pin;
 	}

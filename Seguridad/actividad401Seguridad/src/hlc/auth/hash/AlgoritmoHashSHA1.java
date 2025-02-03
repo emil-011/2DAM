@@ -10,7 +10,6 @@ import javax.crypto.spec.SecretKeySpec;
  */
 public class AlgoritmoHashSHA1 implements AlgoritmoHash {
 
-  // Nombre del algoritmo en la libreria
   private static final String ALGORITMO = "HmacSHA1";
   
   @Override
@@ -20,10 +19,9 @@ public class AlgoritmoHashSHA1 implements AlgoritmoHash {
       SecretKeySpec claveAlg = new SecretKeySpec(clave, ALGORITMO);
       // Obtenemos la instancia del algoritmo
       Mac mac = Mac.getInstance(ALGORITMO);
-      // Se inicializa con la clave
       mac.init(claveAlg);
 
-      // Crea y devuelve el resumen con los datos proporcionados
+      // Devolvemos el hash
       return mac.doFinal(datos);
       
     } catch (Exception e) {

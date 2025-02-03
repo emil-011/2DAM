@@ -43,10 +43,10 @@ public class GeneradorHOTP {
   }
 
   /**
-   * Genera una clave OTP partiendo de un secreto y un contador
-   * @param secreto. Secreto. Número hexadecimal de 16 cifras (64 bits)
-   * @param contador. Contador
-   * @return Clave OTP con el número de dígitos configurado en la creación
+   * Genera una clave OTP partiendo de un secreto
+   * @param secreto - Número hexadecimal de 16 cifras (64 bits)
+   * @param contador - Contador
+   * @return - Clave OTP con el número de dígitos configurado en la creación
    */
   public String genera(String secreto, long contador) {
     try {
