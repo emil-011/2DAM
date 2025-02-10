@@ -1,5 +1,6 @@
 package psp.ud03.act303.server;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.ServerSocket;
@@ -9,8 +10,8 @@ import java.util.Properties;
 /**
  * Clase principal del servidor de archivos.
  * 
- * Se encarga de gestionar las conexiones con los clientes y procesar
- * sus solicitudes: [listar, mostrar contenido y borrar archivos]
+ * Se encarga de gestionar las conexiones con los clientes y procesar sus
+ * solicitudes: [listar, mostrar contenido y borrar archivos]
  * 
  * Crea un hilo independiente (Worker) para cada cliente que se conecta.
  * 
@@ -27,8 +28,7 @@ public class FileServerApp {
 		FileServerApp app = new FileServerApp();
 		app.run();
 	}
-	
-	
+
 	private void run() {
 		// Leemos la configuración del archivo server.properties
 		int port = readServerConfig();
@@ -60,16 +60,17 @@ public class FileServerApp {
 	 */
 	private static int readServerConfig() {
 		Properties properties = new Properties();
-		try (InputStream input = FileServerApp.class.getClassLoader().getResourceAsStream(CONFIG_FILE)) {
-			if (input != null) {
-				properties.load(input);
-				String portString = properties.getProperty("puerto");
-				if (portString != null) {
-					return Integer.parseInt(portString);
-				}
+		try (InputStream input = new FileInputStream(CONFIG_FILE)) {
+			properties.load(input);
+			String portString = properties.getProperty("puerto");
+			if (portString != null) {
+				return Integer.parseInt(portString);
+			} else {
+				System.err.println("Error al leer la configuración. ");
 			}
-		} catch (IOException | NumberFormatException e) {
-			System.err.println("Error al leer la configuración. Usando puerto por defecto: " + DEFAULT_PORT);
+		} catch (Exception e) {
+			System.err.println("Error al leer la configuración. ");
+			System.out.println("Usando puerto por defecto: " + DEFAULT_PORT);
 		}
 		return DEFAULT_PORT;
 	}
