@@ -137,6 +137,7 @@ public class CommandProcessorImpl implements CommandProcessorInt {
 			sendResponse(KO);
 		}
 	}
+	
 
 	// Elimina un archivo.
 	private void deleteFile(Path filePath) throws IOException {

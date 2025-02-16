@@ -7,16 +7,15 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 import psp.ud03.act303.utils.commands.CommandProcessorImpl;
+import psp.ud03.act303.utils.commands.prueba.CommandPruebaProcessorImpl;
 
 /**
  * Clase que maneja a cada cliente con un hilo.
  * 
  * 
- * Los comandos son:
- * - list: Listar archivos en un directorio.
- * - delete: Eliminar un archivo o carpeta vacía.
- * - show: Mostrar el contenido de un archivo.
- * - quit: Cerrar la conexión con el cliente.
+ * Los comandos son: - list: Listar archivos en un directorio. - delete:
+ * Eliminar un archivo o carpeta vacía. - show: Mostrar el contenido de un
+ * archivo. - quit: Cerrar la conexión con el cliente.
  * 
  * @author Emi
  * @version v1.0
@@ -31,6 +30,8 @@ public class Worker extends Thread {
 	private PrintWriter output;
 	// Procesador de comandos
 	private CommandProcessorImpl commandProcessor;
+	// Procesador de comandos de prueba
+	private CommandPruebaProcessorImpl commandProcessorPrueba;
 
 	public Worker(Socket connection) throws IOException {
 		// Creamos los flujos de entrada y salida a partir de la conexión
@@ -38,6 +39,7 @@ public class Worker extends Thread {
 		output = new PrintWriter(connection.getOutputStream());
 		// Inicializamos el procesador de comandos
 		commandProcessor = new CommandProcessorImpl(output);
+		commandProcessorPrueba = new CommandPruebaProcessorImpl(output);
 	}
 
 	@Override
